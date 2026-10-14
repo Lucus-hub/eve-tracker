@@ -265,4 +265,4 @@ jobs:
           git push origin HEAD:main
 
       - name: Done
-        run: echo "OK - Depot construit. Activez Settings > Pages > Source: GitHub Actions, puis lancez Scrape & Deploy."
+               run: echo "OK - depot construit. Activez ensuite Pages puis lancez Scrape and Deploy"
