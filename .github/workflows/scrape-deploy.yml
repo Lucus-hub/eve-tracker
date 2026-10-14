@@ -1,0 +1,69 @@
+name: Scrape & Deploy
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "scrape-deploy"
+  cancel-in-progress: false
+
+jobs:
+  scrape-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install scraper dependencies
+        run: cd scraper && npm install
+
+      - name: Install Playwright Chromium
+        run: cd scraper && npx playwright install --with-deps chromium
+
+      - name: Run scraper
+        run: cd scraper && npx ts-node scraper.ts
+
+      - name: Copy data to app
+        run: cp data/history.json app/src/data.json
+
+      - name: Commit fresh data
+        run: |
+          git config user.name "eve-tracker-bot"
+          git config user.email "actions@github.com"
+          git add data app/src/data.json
+          if git diff --staged --quiet; then
+            echo "Pas de changement de prix — pas de commit."
+          else
+            git commit -m "data: mise à jour des prix $(date -u +%F)"
+            git push
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install app dependencies
+        run: cd app && npm install
+
+      - name: Build app
+        run: cd app && npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
