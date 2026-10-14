@@ -1,8 +1,10 @@
 name: Bootstrap — construire le dépôt EVE Tracker
 
-# Ce workflow est À USAGE UNIQUE : il écrit tous les fichiers du projet
-# (scraper, app React, workflow quotidien, données) puis les committe.
-# Après son exécution, vous pouvez le laisser ou le supprimer.
+# Ce workflow est À USAGE UNIQUE : il écrit les fichiers du projet
+# (scraper, app React, données) puis les committe.
+# NB : les fichiers .github/workflows ne peuvent pas être commités par un
+# workflow (limite GitHub) — créez scrape-deploy.yml à la main (voir kit).
+# Ce fichier bootstrap.yml doit être relancé (Run workflow) après l'avoir mis à jour.
 
 on:
   workflow_dispatch:
@@ -27,13 +29,6 @@ jobs:
           B="${B}YiBQYWdlcy4KClNpdGUgcHVibGnDqSA6IGh0dHBzOi8vbHVjdXMtaHViLmdpdGh1Yi5pby9ldmUtdHJhY2tlci8KCiMjIExhbmNlbWVudCBtYW51ZWwKT25nbGV0ICoqQWN0aW9ucyoqIOKGkiAqU2NyYXBlICYgRGVwbG95KiDihpIgKipSdW4gd29ya2Zsb3cqKi4KCiMjIFLDqGdsZXMgZGUgZmlhYmlsaXTDqSBkZXMgcHJpeAotIFNvdXJjZXMgOiB1bmlxdWVtZW50IGxlcyBzaXRlcyBkZXMgcmV2ZW5kZXVycyB0cmFja8OpcyAobGlzdGUgYmxhbmNoZSBkYW5zIGxlIHNjcmFwZXIpLgotIFByaXggbHVzIHN1ciBmaWNoZSBwcm9kdWl0IChKU09OLUxEIHByaW9yaXRhaXJlKSA7IGNlbGx1bGUgdmlkZSBzaSBhdWN1biBwcml4IGZpYWJsZS4KLSBNdXNpYyBTdG9y"
           B="${B}ZSA6IHN0b3JlZnJvbnQgRnJhbmNlIHVuaXF1ZW1lbnQgKHByaXggZ8Opby1kw6lwZW5kYW50cykuCi0gUHJpeCBlbiBydXB0dXJlIGNvbnNlcnbDqXMgKMOpdGF0IGR1IG1hcmNow6kpLCBhZmZpY2jDqXMgZ3Jpc8OpcyBhdmVjIG1hcnF1ZXVyIOKblC4KLSBSZWpldCA6IEItc3RvY2svUmV0b3VyZS9wYWlyZXMsIHByaXggaG9ycyBib3JuZXMgTVNSUCDCsTM1ICUuCg=="
           wf "README.md" "$B"
-          B=""
-          B="${B}bmFtZTogU2NyYXBlICYgRGVwbG95CgpvbjoKICBzY2hlZHVsZToKICAgIC0gY3JvbjogIjAgNiAqICogKiIKICB3b3JrZmxvd19kaXNwYXRjaDoKCnBlcm1pc3Npb25zOgogIGNvbnRlbnRzOiB3cml0ZQogIHBhZ2VzOiB3cml0ZQogIGlkLXRva2VuOiB3cml0ZQoKY29uY3VycmVuY3k6CiAgZ3JvdXA6ICJzY3JhcGUtZGVwbG95IgogIGNhbmNlbC1pbi1wcm9ncmVzczogZmFsc2UKCmpvYnM6CiAgc2NyYXBlLWFuZC1kZXBsb3k6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICB0aW1lb3V0LW1pbnV0ZXM6IDE4MAogICAgc3RlcHM6CiAgICAgIC0gbmFtZTogQ2hlY2tvdXQKICAgICAgICB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHY0CgogICAgICAtIG5h"
-          B="${B}bWU6IFNldHVwIE5vZGUKICAgICAgICB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjQKICAgICAgICB3aXRoOgogICAgICAgICAgbm9kZS12ZXJzaW9uOiAiMjAiCgogICAgICAtIG5hbWU6IEluc3RhbGwgc2NyYXBlciBkZXBlbmRlbmNpZXMKICAgICAgICBydW46IGNkIHNjcmFwZXIgJiYgbnBtIGluc3RhbGwKCiAgICAgIC0gbmFtZTogSW5zdGFsbCBQbGF5d3JpZ2h0IENocm9taXVtCiAgICAgICAgcnVuOiBjZCBzY3JhcGVyICYmIG5weCBwbGF5d3JpZ2h0IGluc3RhbGwgLS13aXRoLWRlcHMgY2hyb21pdW0KCiAgICAgIC0gbmFtZTogUnVuIHNjcmFwZXIKICAgICAgICBydW46IGNkIHNjcmFwZXIgJiYgbnB4IHRzLW5vZGUgc2NyYXBlci50cwoKICAgICAg"
-          B="${B}LSBuYW1lOiBDb3B5IGRhdGEgdG8gYXBwCiAgICAgICAgcnVuOiBjcCBkYXRhL2hpc3RvcnkuanNvbiBhcHAvc3JjL2RhdGEuanNvbgoKICAgICAgLSBuYW1lOiBDb21taXQgZnJlc2ggZGF0YQogICAgICAgIHJ1bjogfAogICAgICAgICAgZ2l0IGNvbmZpZyB1c2VyLm5hbWUgImV2ZS10cmFja2VyLWJvdCIKICAgICAgICAgIGdpdCBjb25maWcgdXNlci5lbWFpbCAiYWN0aW9uc0BnaXRodWIuY29tIgogICAgICAgICAgZ2l0IGFkZCBkYXRhIGFwcC9zcmMvZGF0YS5qc29uCiAgICAgICAgICBpZiBnaXQgZGlmZiAtLXN0YWdlZCAtLXF1aWV0OyB0aGVuCiAgICAgICAgICAgIGVjaG8gIlBhcyBkZSBjaGFuZ2VtZW50IGRlIHByaXgg4oCUIHBhcyBkZSBjb21taXQu"
-          B="${B}IgogICAgICAgICAgZWxzZQogICAgICAgICAgICBnaXQgY29tbWl0IC1tICJkYXRhOiBtaXNlIMOgIGpvdXIgZGVzIHByaXggJChkYXRlIC11ICslRikiCiAgICAgICAgICAgIGdpdCBwdXNoCiAgICAgICAgICBmaQoKICAgICAgLSBuYW1lOiBTZXR1cCBQYWdlcwogICAgICAgIHVzZXM6IGFjdGlvbnMvY29uZmlndXJlLXBhZ2VzQHY1CgogICAgICAtIG5hbWU6IEluc3RhbGwgYXBwIGRlcGVuZGVuY2llcwogICAgICAgIHJ1bjogY2QgYXBwICYmIG5wbSBpbnN0YWxsCgogICAgICAtIG5hbWU6IEJ1aWxkIGFwcAogICAgICAgIHJ1bjogY2QgYXBwICYmIG5wbSBydW4gYnVpbGQKCiAgICAgIC0gbmFtZTogVXBsb2FkIFBhZ2VzIGFydGlmYWN0CiAgICAgICAgdXNl"
-          B="${B}czogYWN0aW9ucy91cGxvYWQtcGFnZXMtYXJ0aWZhY3RAdjMKICAgICAgICB3aXRoOgogICAgICAgICAgcGF0aDogYXBwL2Rpc3QKCiAgICAgIC0gbmFtZTogRGVwbG95IHRvIEdpdEh1YiBQYWdlcwogICAgICAgIHVzZXM6IGFjdGlvbnMvZGVwbG95LXBhZ2VzQHY0Cg=="
-          wf ".github/workflows/scrape-deploy.yml" "$B"
           B=""
           B="${B}ewogICJuYW1lIjogImV2ZS10cmFja2VyLXNjcmFwZXIiLAogICJ2ZXJzaW9uIjogIjEuMC4wIiwKICAicHJpdmF0ZSI6IHRydWUsCiAgInNjcmlwdHMiOiB7CiAgICAic2NyYXBlIjogInRzLW5vZGUgc2NyYXBlci50cyIKICB9LAogICJkZXBlbmRlbmNpZXMiOiB7CiAgICAiYmV0dGVyLXNxbGl0ZTMiOiAiXjExLjMuMCIsCiAgICAicGxheXdyaWdodCI6ICJeMS40Ny4wIgogIH0sCiAgImRldkRlcGVuZGVuY2llcyI6IHsKICAgICJAdHlwZXMvYmV0dGVyLXNxbGl0ZTMiOiAiXjcuNi4xMSIsCiAgICAiQHR5cGVzL25vZGUiOiAiXjIwLjE0LjAiLAogICAgInRzLW5vZGUiOiAiXjEwLjkuMiIsCiAgICAidHlwZXNjcmlwdCI6ICJeNS41LjQiCiAgfQp9Cg=="
           wf "scraper/package.json" "$B"
@@ -261,8 +256,8 @@ jobs:
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
           git add -A
-          git commit -m "feat: EVE Tracker — scraper + dashboard + workflow quotidien"
+          git commit -m "feat: EVE Tracker — scraper + dashboard + données initiales"
           git push origin HEAD:main
 
       - name: Done
-        run: echo "OK - depot construit. Activez ensuite Pages puis lancez Scrape and Deploy"
+        run: echo "OK - depot construit (scraper + app + donnees)."
