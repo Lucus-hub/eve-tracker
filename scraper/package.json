@@ -1,0 +1,18 @@
+{
+  "name": "eve-tracker-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "scrape": "ts-node scraper.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "playwright": "^1.47.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
