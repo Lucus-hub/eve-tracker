@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Purge snapshot database
+        run: rm -f data/tracker.db
+
       - name: Install scraper dependencies
         run: cd scraper && npm install
 
@@ -43,11 +46,13 @@ jobs:
         run: |
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
+          git rm --cached -r data/tracker.db 2>/dev/null || true
           git add data app/src/data.json
+          git add .gitignore
           if git diff --staged --quiet; then
-            echo "Pas de changement de prix — pas de commit."
+            echo "Pas de changement de prix - pas de commit."
           else
-            git commit -m "data: mise à jour des prix $(date -u +%F)"
+            git commit -m "data: mise a jour des prix $(date -u +%F)"
             git push
           fi
 
