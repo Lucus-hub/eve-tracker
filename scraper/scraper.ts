@@ -28,7 +28,7 @@
 
 import { chromium, type Browser, type Page } from "playwright";
 import Database from "better-sqlite3";
-import { mkdirSync, writeFileSync, readFileSync } from "fs";
+import { mkdirSync, writeFileSync, readFileSync, unlinkSync } from "fs";
 import path from "path";
 
 // ----------------------------------------------------------------------------
@@ -254,7 +254,7 @@ async function gbpToEur(): Promise<number> {
 /** Étage A : JSON-LD schema.org (Product / Offer) — source la plus fiable.
  *  La plupart des boutiques ci-dessus l'embarquent ; il contient prix, devise
  *  et disponibilité SANS risque de prix adjacent décalé. */
-async function extractJsonLd(page: Page): Promise<{ price: number; stock: Offer["stock"] } | null> {
+async function extractJsonLd(page: Page, productId?: string): Promise<{ price: number; stock: Offer["stock"]; name?: string } | null> {
   const data = await page.evaluate(() => {
     const out: { price?: string; availability?: string; name?: string }[] = [];
     document.querySelectorAll('script[type="application/ld+json"]').forEach((s) => {
@@ -275,16 +275,22 @@ async function extractJsonLd(page: Page): Promise<{ price: number; stock: Offer[
     });
     return JSON.stringify(out);
   }).catch(() => "[]");
-  const nodes = JSON.parse(data) as { price?: string; availability?: string }[];
-  const withPrice = nodes.find((n) => n.price && parseFloat(n.price) > 0);
-  if (!withPrice) return null;
-  const avail = (withPrice.availability || "").toLowerCase();
+  const nodes = JSON.parse(data) as { price?: string; availability?: string; name?: string }[];
+  // v6 : si un produit est demandé, le nom JSON-LD DOIT le mentionner —
+  // sinon c'est le prix d'un autre produit (page de recherche, voisin) → rejet
+  const withPrice = nodes.filter((n) => n.price && parseFloat(n.price) > 0);
+  if (!withPrice.length) return null;
+  const good = productId
+    ? withPrice.find((n) => jsonLdNameMatches(n.name, productId))
+    : withPrice[0];
+  if (!good) return null;
+  const avail = (good.availability || "").toLowerCase();
   const stock: Offer["stock"] =
     avail.includes("instock") || avail.includes("in_stock") ? "in"
     : avail.includes("limitedavailability") ? "low"
     : avail.includes("outofstock") || avail.includes("preorder") ? "out"
     : "in";
-  return { price: parseFloat(withPrice.price!), stock };
+  return { price: parseFloat(good.price!), stock, name: good.name };
 }
 
 /** Étage B : sélecteurs CSS sur la fiche produit. Le prix retenu doit être
@@ -342,6 +348,18 @@ async function pageMentionsProduct(page: Page, productId: string): Promise<boole
   return title.includes(ref) || h1Text.includes(ref) || url.includes(ref);
 }
 
+/** v6 : le NOM du produit dans le JSON-LD doit contenir la référence.
+ *  C'est le contrôle le plus strict : sur une fiche produit, le JSON-LD
+ *  porte le nom exact ("EVE Audio SC3070 ..."), sur une page de recherche
+ *  ou une fiche voisine, il porte un autre nom → rejet.
+ *  Exclut aussi les paires déguisées ("...Paar", "...Pair", "2 pcs"). */
+function jsonLdNameMatches(name: string | undefined, productId: string): boolean {
+  if (!name) return false;
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const ref = norm(productId);
+  return norm(name).includes(ref);
+}
+
 async function scrapeProductAtRetailer(
   page: Page, productId: string, r: Retailer, fxRate: number
 ): Promise<Offer | null> {
@@ -363,8 +381,8 @@ async function scrapeProductAtRetailer(
         continue;
       }
 
-      // Étage A — JSON-LD
-      let extracted = await extractJsonLd(page);
+      // Étage A — JSON-LD (v6 : le nom du produit doit correspondre)
+      let extracted = await extractJsonLd(page, productId);
       let confidence: Offer["confidence"] = "structured";
       // Étage B — CSS
       if (!extracted) {
@@ -427,8 +445,13 @@ async function run() {
 // ----------------------------------------------------------------------------
 // 6. PERSISTANCE — SQLite (historique complet, un snapshot par run)
 // ----------------------------------------------------------------------------
-function saveToSqlite(offers: Offer[]) {
-  const db = new Database(path.join(__dirname, "..", "data", "tracker.db"));
+async function saveToSqlite(offers: Offer[]) {
+  // v6 : purge de la base à chaque run — les snapshots d'un run donné ne
+  // doivent jamais fuiter dans un export ultérieur (cause des prix
+  // aberrants réinjectés depuis tracker.db).
+  const dbPath = path.join(__dirname, "..", "data", "tracker.db");
+  try { unlinkSync(dbPath); } catch { /* base absente → premier run */ }
+  const db = new Database(dbPath);
   db.exec(`
     CREATE TABLE IF NOT EXISTS price_snapshots (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -1,0 +1,3 @@
+node_modules/
+data/tracker.db
+scraper/data/tracker.db
