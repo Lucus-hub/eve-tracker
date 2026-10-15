@@ -208,6 +208,14 @@ const musicStoreSlug: Record<string, string> = {
 };
 const g4mIds: Record<string, string> = { "EXO24": "77WE", "EXO27": "77WG", "EXO28": "77WI" };
 
+// v7 — EXCLUSIONS PAR REVENDEUR : couples produit×revendeur à NE JAMAIS
+// collecter automatiquement (prix ambigu détecté en production, ex. KMR ne
+// vend SC4070/TS107 qu'en paire ou via des pages de recherche trompeuses).
+// La cellule reste vide dans le dashboard — jamais de prix douteux.
+const RETAILER_EXCLUSIONS: Record<string, string[]> = {
+  kmr: ["SC4070", "TS107"],
+};
+
 // ----------------------------------------------------------------------------
 // 3. PARSERS DE PRIX (formats FR / DE / UK)
 // ----------------------------------------------------------------------------
@@ -425,6 +433,11 @@ async function run() {
     const page = await context.newPage();
 
     for (const productId of Object.keys(MSRP)) {
+      // v7 : exclusions par revendeur (couples sources d'erreurs connues)
+      if (RETAILER_EXCLUSIONS[r.id]?.includes(productId)) {
+        console.log(`➖ ${productId} @ ${r.name} : exclu (couple à prix ambigu)`);
+        continue;
+      }
       const offer = await scrapeProductAtRetailer(page, productId, r, fxRate);
       if (offer) {
         offers.push(offer);
