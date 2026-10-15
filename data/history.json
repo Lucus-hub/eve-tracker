@@ -9,7 +9,8 @@
     "SC305": 899,
     "SC307": 1049,
     "SC2070": 949,
-    "SC3070": 1699,
+    "SC3070L": 1699,
+    "SC3070R": 1699,
     "SC4070": 2399,
     "SC3010": 3999,
     "SC3012": 5199,
@@ -167,7 +168,15 @@
         "confidence": "selector"
       }
     ],
-    "SC3070|musikproductive": [
+    "SC3070L|musikproductive": [
+      {
+        "month": "2026-10",
+        "price": 1360,
+        "ts": "2026-10-15T07:57:54.615Z",
+        "confidence": "selector"
+      }
+    ],
+    "SC3070R|musikproductive": [
       {
         "month": "2026-10",
         "price": 1360,
@@ -433,7 +442,13 @@
         "price": 888
       }
     ],
-    "SC3070|thomann": [
+    "SC3070L|thomann": [
+      {
+        "month": "2026-10",
+        "price": 1349
+      }
+    ],
+    "SC3070R|thomann": [
       {
         "month": "2026-10",
         "price": 1349
@@ -492,7 +507,9 @@
     "SC305|sonovente": [
       {
         "month": "2026-10",
-        "price": 849
+        "price": 799,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
       }
     ],
     "SC307|sonovente": [
@@ -510,7 +527,9 @@
     "TS107|sonovente": [
       {
         "month": "2026-10",
-        "price": 574
+        "price": 539,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
       }
     ],
     "TS108|sonovente": [
@@ -604,7 +623,13 @@
         "price": 649
       }
     ],
-    "SC3070|vonbroenner": [
+    "SC3070L|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 1489
+      }
+    ],
+    "SC3070R|vonbroenner": [
       {
         "month": "2026-10",
         "price": 1489
@@ -634,7 +659,13 @@
         "price": 899
       }
     ],
-    "SC3070|musikstore": [
+    "SC3070L|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 1499
+      }
+    ],
+    "SC3070R|musikstore": [
       {
         "month": "2026-10",
         "price": 1499
@@ -736,7 +767,13 @@
         "price": 600
       }
     ],
-    "SC3070|musiker": [
+    "SC3070L|musiker": [
+      {
+        "month": "2026-10",
+        "price": 1350.58
+      }
+    ],
+    "SC3070R|musiker": [
       {
         "month": "2026-10",
         "price": 1350.58
@@ -746,6 +783,119 @@
       {
         "month": "2026-10",
         "price": 1249
+      }
+    ],
+    "SC4070|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 2099,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "TS110|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070L|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070R|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC203SET|universsons": [
+      {
+        "month": "2026-10",
+        "price": 499,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC305|universsons": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC307|universsons": [
+      {
+        "month": "2026-10",
+        "price": 899,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "TS107|universsons": [
+      {
+        "month": "2026-10",
+        "price": 539,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS108|universsons": [
+      {
+        "month": "2026-10",
+        "price": 789,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS110|universsons": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC4070|universsons": [
+      {
+        "month": "2026-10",
+        "price": 2099,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070L|universsons": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070R|universsons": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:10:50.388Z",
+        "stock": "out",
+        "confidence": "manual"
       }
     ]
   }
