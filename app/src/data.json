@@ -75,7 +75,7 @@
     },
     {
       "id": "vonbroenner",
-      "name": "von Brönner",
+      "name": "von broenner",
       "country": "DE",
       "currency": "EUR"
     },
@@ -87,6 +87,90 @@
     }
   ],
   "history": {
+    "EXO24|thomann": [
+      {
+        "month": "2026-10",
+        "price": 429
+      }
+    ],
+    "EXO25|thomann": [
+      {
+        "month": "2026-10",
+        "price": 525
+      }
+    ],
+    "EXO27|thomann": [
+      {
+        "month": "2026-10",
+        "price": 639
+      }
+    ],
+    "EXO28|thomann": [
+      {
+        "month": "2026-10",
+        "price": 799
+      }
+    ],
+    "SC305|thomann": [
+      {
+        "month": "2026-10",
+        "price": 799
+      }
+    ],
+    "SC307|thomann": [
+      {
+        "month": "2026-10",
+        "price": 939
+      }
+    ],
+    "SC2070|thomann": [
+      {
+        "month": "2026-10",
+        "price": 888
+      }
+    ],
+    "SC3070|thomann": [
+      {
+        "month": "2026-10",
+        "price": 1349
+      }
+    ],
+    "SC4070|thomann": [
+      {
+        "month": "2026-10",
+        "price": 2099
+      }
+    ],
+    "SC203SET|thomann": [
+      {
+        "month": "2026-10",
+        "price": 499
+      }
+    ],
+    "TS107|thomann": [
+      {
+        "month": "2026-10",
+        "price": 539
+      }
+    ],
+    "TS108|thomann": [
+      {
+        "month": "2026-10",
+        "price": 789
+      }
+    ],
+    "TS110|thomann": [
+      {
+        "month": "2026-10",
+        "price": 999
+      }
+    ],
+    "TS112|thomann": [
+      {
+        "month": "2026-10",
+        "price": 1249
+      }
+    ],
     "EXO24|michenaud": [
       {
         "month": "2026-10",
@@ -114,9 +198,21 @@
     "EXO28|michenaud": [
       {
         "month": "2026-10",
-        "price": 1049,
-        "ts": "2026-10-14T13:30:44.020Z",
+        "price": 849
+      }
+    ],
+    "SC305|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 899,
+        "ts": "2026-10-14T13:31:02.066Z",
         "confidence": "structured"
+      }
+    ],
+    "SC307|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 1049
       }
     ],
     "SC203SET|michenaud": [
@@ -127,11 +223,164 @@
         "confidence": "structured"
       }
     ],
-    "SC305|michenaud": [
+    "SC305|sonovente": [
       {
         "month": "2026-10",
-        "price": 899,
-        "ts": "2026-10-14T13:31:02.066Z",
+        "price": 849
+      }
+    ],
+    "SC307|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 899
+      }
+    ],
+    "SC203SET|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 499
+      }
+    ],
+    "TS107|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 574
+      }
+    ],
+    "TS108|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 789
+      }
+    ],
+    "EXO24|stars": [
+      {
+        "month": "2026-10",
+        "price": 439
+      }
+    ],
+    "EXO25|stars": [
+      {
+        "month": "2026-10",
+        "price": 559
+      }
+    ],
+    "EXO27|stars": [
+      {
+        "month": "2026-10",
+        "price": 640
+      }
+    ],
+    "EXO28|stars": [
+      {
+        "month": "2026-10",
+        "price": 823
+      }
+    ],
+    "SC305|stars": [
+      {
+        "month": "2026-10",
+        "price": 888
+      }
+    ],
+    "SC2070|stars": [
+      {
+        "month": "2026-10",
+        "price": 899
+      }
+    ],
+    "SC203SET|stars": [
+      {
+        "month": "2026-10",
+        "price": 499
+      }
+    ],
+    "SC3010|stars": [
+      {
+        "month": "2026-10",
+        "price": 3999
+      }
+    ],
+    "SC3012|stars": [
+      {
+        "month": "2026-10",
+        "price": 5199,
+        "stock": "out"
+      }
+    ],
+    "TS110|stars": [
+      {
+        "month": "2026-10",
+        "price": 1006
+      }
+    ],
+    "TS112|stars": [
+      {
+        "month": "2026-10",
+        "price": 1280
+      }
+    ],
+    "EXO24|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 429
+      }
+    ],
+    "EXO25|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 525
+      }
+    ],
+    "EXO27|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 649
+      }
+    ],
+    "SC305|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-14T13:54:18.096Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC307|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-14T13:54:27.847Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3070|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 1489
+      }
+    ],
+    "SC4070|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 2099,
+        "ts": "2026-10-14T13:54:51.798Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3010|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 3599,
+        "ts": "2026-10-14T13:55:02.361Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3012|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 4499,
+        "ts": "2026-10-14T13:55:12.659Z",
         "confidence": "structured"
       }
     ],
@@ -167,12 +416,10 @@
         "confidence": "selector"
       }
     ],
-    "SC307|musikproductive": [
+    "SC2070|musikproductive": [
       {
         "month": "2026-10",
-        "price": 1360,
-        "ts": "2026-10-14T13:45:36.811Z",
-        "confidence": "selector"
+        "price": 899
       }
     ],
     "SC3070|musikproductive": [
@@ -207,12 +454,124 @@
         "confidence": "structured"
       }
     ],
-    "TS112|musikproductive": [
+    "SC305|musikstore": [
       {
         "month": "2026-10",
-        "price": 999,
-        "ts": "2026-10-14T13:47:10.010Z",
-        "confidence": "selector"
+        "price": 899
+      }
+    ],
+    "SC307|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 805
+      }
+    ],
+    "SC2070|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 899
+      }
+    ],
+    "SC3070|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 1499
+      }
+    ],
+    "SC4070|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 2016
+      }
+    ],
+    "SC3010|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 3730.1
+      }
+    ],
+    "TS107|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 595
+      }
+    ],
+    "TS108|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 799
+      }
+    ],
+    "TS110|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 999
+      }
+    ],
+    "TS112|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 1049
+      }
+    ],
+    "EXO25|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 486.6
+      }
+    ],
+    "EXO28|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 755.5
+      }
+    ],
+    "EXO24|gear4music": [
+      {
+        "month": "2026-10",
+        "price": 453
+      }
+    ],
+    "EXO27|gear4music": [
+      {
+        "month": "2026-10",
+        "price": 686.01
+      }
+    ],
+    "EXO28|gear4music": [
+      {
+        "month": "2026-10",
+        "price": 900.99
+      }
+    ],
+    "EXO24|musiker": [
+      {
+        "month": "2026-10",
+        "price": 522
+      }
+    ],
+    "EXO25|musiker": [
+      {
+        "month": "2026-10",
+        "price": 609
+      }
+    ],
+    "EXO27|musiker": [
+      {
+        "month": "2026-10",
+        "price": 729
+      }
+    ],
+    "EXO28|musiker": [
+      {
+        "month": "2026-10",
+        "price": 955
+      }
+    ],
+    "SC203SET|musiker": [
+      {
+        "month": "2026-10",
+        "price": 600
       }
     ],
     "SC305|musiker": [
@@ -226,9 +585,7 @@
     "SC307|musiker": [
       {
         "month": "2026-10",
-        "price": 1010.47,
-        "ts": "2026-10-14T13:51:37.091Z",
-        "confidence": "structured"
+        "price": 1209
       }
     ],
     "SC2070|musiker": [
@@ -237,6 +594,12 @@
         "price": 955,
         "ts": "2026-10-14T13:51:45.002Z",
         "confidence": "structured"
+      }
+    ],
+    "SC3070|musiker": [
+      {
+        "month": "2026-10",
+        "price": 1350.58
       }
     ],
     "SC3010|musiker": [
@@ -279,20 +642,40 @@
         "confidence": "structured"
       }
     ],
-    "SC305|vonbroenner": [
+    "TS112|musiker": [
       {
         "month": "2026-10",
-        "price": 799,
-        "ts": "2026-10-14T13:54:18.096Z",
-        "confidence": "structured"
+        "price": 1249
       }
     ],
-    "SC307|vonbroenner": [
+    "EXO24|kmr": [
       {
         "month": "2026-10",
-        "price": 999,
-        "ts": "2026-10-14T13:54:27.847Z",
-        "confidence": "structured"
+        "price": 429
+      }
+    ],
+    "EXO25|kmr": [
+      {
+        "month": "2026-10",
+        "price": 525
+      }
+    ],
+    "EXO27|kmr": [
+      {
+        "month": "2026-10",
+        "price": 649
+      }
+    ],
+    "EXO28|kmr": [
+      {
+        "month": "2026-10",
+        "price": 849
+      }
+    ],
+    "SC305|kmr": [
+      {
+        "month": "2026-10",
+        "price": 799
       }
     ],
     "SC2070|vonbroenner": [
@@ -300,38 +683,6 @@
         "month": "2026-10",
         "price": 888,
         "ts": "2026-10-14T13:54:34.315Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3070|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 1489.001489,
-        "ts": "2026-10-14T13:54:44.098Z",
-        "confidence": "selector"
-      }
-    ],
-    "SC4070|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 2099,
-        "ts": "2026-10-14T13:54:51.798Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3010|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 3599,
-        "ts": "2026-10-14T13:55:02.361Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3012|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 4499,
-        "ts": "2026-10-14T13:55:12.659Z",
         "confidence": "structured"
       }
     ],
@@ -365,30 +716,6 @@
         "price": 1249,
         "ts": "2026-10-14T13:55:43.355Z",
         "confidence": "structured"
-      }
-    ],
-    "EXO24|gear4music": [
-      {
-        "month": "2026-10",
-        "price": 128700.8,
-        "ts": "2026-10-14T13:55:53.459Z",
-        "confidence": "selector"
-      }
-    ],
-    "EXO27|gear4music": [
-      {
-        "month": "2026-10",
-        "price": 128700.8,
-        "ts": "2026-10-14T13:56:14.952Z",
-        "confidence": "selector"
-      }
-    ],
-    "EXO28|gear4music": [
-      {
-        "month": "2026-10",
-        "price": 128700.8,
-        "ts": "2026-10-14T13:56:23.833Z",
-        "confidence": "selector"
       }
     ]
   }

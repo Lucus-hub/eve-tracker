@@ -28,7 +28,7 @@
 
 import { chromium, type Browser, type Page } from "playwright";
 import Database from "better-sqlite3";
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, writeFileSync, readFileSync } from "fs";
 import path from "path";
 
 // ----------------------------------------------------------------------------
@@ -211,20 +211,32 @@ const g4mIds: Record<string, string> = { "EXO24": "77WE", "EXO27": "77WG", "EXO2
 // ----------------------------------------------------------------------------
 // 3. PARSERS DE PRIX (formats FR / DE / UK)
 // ----------------------------------------------------------------------------
-export function parseEurFr(raw: string): number | null {
-  const cleaned = raw.replace(/[^\d.,]/g, "").replace(/\./g, "").replace(",", ".");
-  const n = parseFloat(cleaned);
-  return isNaN(n) || n <= 0 ? null : n;
-}
-export function parseGbp(raw: string): number | null {
+/**
+ * Parseur de prix UNIFIÉ et robuste (v3).
+ * Règle : si virgule ET point présents, le DERNIER séparateur est le décimal.
+ * Rejets : prix concaténés (deux prix collés par un sélecteur trop large,
+ * ex. "1.489,001.489,00") et valeurs ambiguës → cellule vide, jamais de prix deviné.
+ */
+export function parsePrice(raw: string): number | null {
   const cleaned = raw.replace(/[^\d.,]/g, "");
-  const isUkFormat = cleaned.lastIndexOf(",") > cleaned.lastIndexOf(".");
-  const normalized = isUkFormat
-    ? cleaned.replace(/,/g, "")
-    : cleaned.replace(/\./g, "").replace(",", ".");
+  if (!cleaned || !/\d/.test(cleaned)) return null;
+  const lastComma = cleaned.lastIndexOf(",");
+  const lastDot = cleaned.lastIndexOf(".");
+  let normalized: string;
+  if (lastComma > lastDot) {
+    normalized = cleaned.replace(/\./g, "").replace(/,/g, ".");
+  } else {
+    normalized = cleaned.replace(/,/g, "");
+  }
+  // garde-fou anti-concaténation : "1489.001489" (deux prix collés) → rejet
+  if (/\.\d{3,}/.test(normalized)) return null;
   const n = parseFloat(normalized);
-  return isNaN(n) || n <= 0 ? null : n;
+  if (isNaN(n) || n <= 0) return null;
+  return Math.round(n * 100) / 100;
 }
+/** compat : l'EUR et la GBP partagent le même parseur, la conversion est aval */
+export const parseEurFr = parsePrice;
+export const parseGbp = parsePrice;
 async function gbpToEur(): Promise<number> {
   try {
     const res = await fetch("https://api.frankfurter.app/latest?from=GBP&to=EUR");
@@ -288,10 +300,10 @@ async function extractWithSelectors(
     const el = await page.$(sel);
     if (!el) continue;
     const raw = (await el.textContent()) ?? "";
-    const price = r.currency === "GBP" ? parseGbp(raw) : parseEurFr(raw);
+    const price = parsePrice(raw);
     if (!price) continue;
     if (strikeText) {
-      const strike = r.currency === "GBP" ? parseGbp(strikeText) : parseEurFr(strikeText);
+      const strike = parsePrice(strikeText);
       if (strike && Math.abs(strike - price) < 0.01) continue; // prix barré → suivant
     }
     const txt = (await page.content()).toLowerCase();
@@ -306,15 +318,28 @@ async function extractWithSelectors(
   return null;
 }
 
-/** Garde-fous anti-bruit : bornes MSRP, variantes interdites, devise. */
-function validate(productId: string, r: Retailer, price: number, pageUrl: string): string | null {
+/** Garde-fous anti-bruit : bornes MSRP (APRÈS conversion €), variantes interdites. */
+function validate(productId: string, _r: Retailer, price: number, pageUrl: string): string | null {
   const msrp = MSRP[productId];
   if (!msrp) return "référence inconnue";
-  if (r.currency === "GBP") return null; // conversion faite en aval
+  // v3 : la vérification s'applique AUSSI aux prix convertis GBP→EUR
   if (price < msrp * (1 - MSRP_TOLERANCE)) return `prix ${price}€ < MSRP−35% (${msrp}€)`;
   if (price > msrp * (1 + MSRP_TOLERANCE)) return `prix ${price}€ > MSRP+35% (${msrp}€)`;
   if (FORBIDDEN_VARIANTS.test(pageUrl)) return "variante B-stock/paire/set";
   return null;
+}
+
+/** v3 : le titre/h1/URL de la page DOIT mentionner la référence cherchée.
+ *  Élimine les faux couples produit-prix (page d'une autre référence,
+ *  prix du mauvais produit sur une page de recherche). */
+async function pageMentionsProduct(page: Page, productId: string): Promise<boolean> {
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const ref = norm(productId); // "SC203SET" → "sc203set"
+  const title = norm(await page.title().catch(() => ""));
+  const h1 = await page.$("h1").catch(() => null);
+  const h1Text = h1 ? norm((await h1.textContent()) ?? "") : "";
+  const url = norm(page.url());
+  return title.includes(ref) || h1Text.includes(ref) || url.includes(ref);
 }
 
 async function scrapeProductAtRetailer(
@@ -331,6 +356,12 @@ async function scrapeProductAtRetailer(
       await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
       await page.waitForTimeout(2500);
       if (/404|page introuvable|not found/i.test(await page.title())) continue;
+
+      // v3 : la page doit bien parler du produit cherché (anti faux-couples)
+      if (!(await pageMentionsProduct(page, productId))) {
+        console.warn(`⛔ ${r.name} × ${productId} rejeté : la page ne mentionne pas la référence`);
+        continue;
+      }
 
       // Étage A — JSON-LD
       let extracted = await extractJsonLd(page);
@@ -462,6 +493,29 @@ function exportJson(offers: Offer[]) {
       last.confidence = r.confidence ?? "selector";
     }
   }
+
+  // ----------------------------------------------------------------------------
+  // v3 — FUSION avec l'historique existant (data/history.json) :
+  // ne JAMAIS écraser les points précédents. Les clés non re-collectées ce run
+  // (revendeur bloqué, rupture de collecte) conservent leurs points, et les
+  // mois antérieurs sont préservés pour les clés re-collectées.
+  // ----------------------------------------------------------------------------
+  const historyPath = path.join(__dirname, "..", "data", "history.json");
+  try {
+    const existing = (JSON.parse(readFileSync(historyPath, "utf8")) as {
+      history?: Record<string, PricePoint[]>;
+    }).history ?? {};
+    for (const [k, points] of Object.entries(existing)) {
+      if (!points?.length) continue;
+      if (!history[k] || !history[k].length) {
+        history[k] = points; // clé non re-collectée → on garde l'existant
+      } else {
+        const firstNewMonth = history[k][0].month;
+        const older = points.filter((p) => p.month < firstNewMonth);
+        if (older.length) history[k] = [...older, ...history[k]];
+      }
+    }
+  } catch { /* pas d'historique existant → premier run */ }
 
   mkdirSync(path.join(__dirname, "..", "data"), { recursive: true });
   const payload = {
