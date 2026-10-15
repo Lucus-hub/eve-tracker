@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T08:09:10.496Z",
+  "updatedAt": "2026-10-15T09:47:54.675Z",
   "msrp": {
     "EXO24": 479,
     "EXO25": 589,
@@ -76,7 +76,7 @@
     },
     {
       "id": "vonbroenner",
-      "name": "von Brönner",
+      "name": "von BrÃ¶nner",
       "country": "DE",
       "currency": "EUR"
     },
@@ -92,7 +92,7 @@
       {
         "month": "2026-10",
         "price": 429,
-        "ts": "2026-10-15T07:42:52.418Z",
+        "ts": "2026-10-15T09:18:56.906Z",
         "confidence": "structured"
       }
     ],
@@ -100,7 +100,7 @@
       {
         "month": "2026-10",
         "price": 525,
-        "ts": "2026-10-15T07:42:59.875Z",
+        "ts": "2026-10-15T09:19:05.257Z",
         "confidence": "structured"
       }
     ],
@@ -108,7 +108,7 @@
       {
         "month": "2026-10",
         "price": 649,
-        "ts": "2026-10-15T07:43:10.125Z",
+        "ts": "2026-10-15T09:19:14.861Z",
         "confidence": "structured"
       }
     ],
@@ -116,7 +116,7 @@
       {
         "month": "2026-10",
         "price": 499,
-        "ts": "2026-10-15T07:43:28.475Z",
+        "ts": "2026-10-15T09:19:33.326Z",
         "confidence": "structured"
       }
     ],
@@ -124,7 +124,135 @@
       {
         "month": "2026-10",
         "price": 899,
-        "ts": "2026-10-15T07:43:36.506Z",
+        "ts": "2026-10-15T09:19:41.298Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC305|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-15T09:22:34.647Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC307|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 899,
+        "ts": "2026-10-15T09:22:42.810Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3070L|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:23:01.342Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3070R|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:23:10.064Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC4070|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 2099,
+        "ts": "2026-10-15T09:23:17.881Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS107|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 539,
+        "ts": "2026-10-15T09:23:43.059Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS108|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 789,
+        "ts": "2026-10-15T09:23:51.296Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS110|sonovente": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-15T09:23:58.375Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC305|universsons": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-15T09:25:00.809Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC307|universsons": [
+      {
+        "month": "2026-10",
+        "price": 899,
+        "ts": "2026-10-15T09:25:07.941Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3070L|universsons": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:25:25.348Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3070R|universsons": [
+      {
+        "month": "2026-10",
+        "price": 1349,
+        "ts": "2026-10-15T09:25:35.669Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC4070|universsons": [
+      {
+        "month": "2026-10",
+        "price": 2099,
+        "ts": "2026-10-15T09:25:41.742Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS107|universsons": [
+      {
+        "month": "2026-10",
+        "price": 539,
+        "ts": "2026-10-15T09:26:06.670Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS108|universsons": [
+      {
+        "month": "2026-10",
+        "price": 789,
+        "ts": "2026-10-15T09:26:16.457Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS110|universsons": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-15T09:26:24.963Z",
         "confidence": "structured"
       }
     ],
@@ -132,7 +260,7 @@
       {
         "month": "2026-10",
         "price": 429,
-        "ts": "2026-10-15T07:56:19.603Z",
+        "ts": "2026-10-15T09:33:17.616Z",
         "confidence": "selector"
       }
     ],
@@ -140,7 +268,7 @@
       {
         "month": "2026-10",
         "price": 525,
-        "ts": "2026-10-15T07:56:32.412Z",
+        "ts": "2026-10-15T09:33:27.594Z",
         "confidence": "selector"
       }
     ],
@@ -148,7 +276,7 @@
       {
         "month": "2026-10",
         "price": 639,
-        "ts": "2026-10-15T07:56:41.738Z",
+        "ts": "2026-10-15T09:33:41.615Z",
         "confidence": "selector"
       }
     ],
@@ -156,7 +284,7 @@
       {
         "month": "2026-10",
         "price": 849,
-        "ts": "2026-10-15T07:56:54.850Z",
+        "ts": "2026-10-15T09:33:55.026Z",
         "confidence": "selector"
       }
     ],
@@ -164,7 +292,7 @@
       {
         "month": "2026-10",
         "price": 1360,
-        "ts": "2026-10-15T07:57:28.803Z",
+        "ts": "2026-10-15T09:34:28.262Z",
         "confidence": "selector"
       }
     ],
@@ -172,7 +300,7 @@
       {
         "month": "2026-10",
         "price": 1360,
-        "ts": "2026-10-15T07:57:54.615Z",
+        "ts": "2026-10-15T09:34:54.679Z",
         "confidence": "selector"
       }
     ],
@@ -180,7 +308,7 @@
       {
         "month": "2026-10",
         "price": 1360,
-        "ts": "2026-10-15T07:57:54.615Z",
+        "ts": "2026-10-15T09:35:07.760Z",
         "confidence": "selector"
       }
     ],
@@ -188,7 +316,7 @@
       {
         "month": "2026-10",
         "price": 539,
-        "ts": "2026-10-15T07:58:33.916Z",
+        "ts": "2026-10-15T09:35:49.336Z",
         "confidence": "structured"
       }
     ],
@@ -196,7 +324,7 @@
       {
         "month": "2026-10",
         "price": 796,
-        "ts": "2026-10-15T07:58:40.005Z",
+        "ts": "2026-10-15T09:36:00.454Z",
         "confidence": "structured"
       }
     ],
@@ -204,7 +332,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-15T07:58:46.538Z",
+        "ts": "2026-10-15T09:36:09.201Z",
         "confidence": "structured"
       }
     ],
@@ -212,7 +340,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-15T07:58:56.739Z",
+        "ts": "2026-10-15T09:36:23.719Z",
         "confidence": "selector"
       }
     ],
@@ -220,7 +348,7 @@
       {
         "month": "2026-10",
         "price": 429,
-        "ts": "2026-10-15T07:59:07.599Z",
+        "ts": "2026-10-15T09:36:34.565Z",
         "confidence": "selector"
       }
     ],
@@ -228,7 +356,7 @@
       {
         "month": "2026-10",
         "price": 525,
-        "ts": "2026-10-15T07:59:18.247Z",
+        "ts": "2026-10-15T09:36:47.047Z",
         "confidence": "selector"
       }
     ],
@@ -236,7 +364,7 @@
       {
         "month": "2026-10",
         "price": 649,
-        "ts": "2026-10-15T07:59:28.066Z",
+        "ts": "2026-10-15T09:37:01.120Z",
         "confidence": "selector"
       }
     ],
@@ -244,7 +372,7 @@
       {
         "month": "2026-10",
         "price": 849,
-        "ts": "2026-10-15T07:59:37.808Z",
+        "ts": "2026-10-15T09:37:11.636Z",
         "confidence": "selector"
       }
     ],
@@ -252,7 +380,7 @@
       {
         "month": "2026-10",
         "price": 799,
-        "ts": "2026-10-15T08:00:03.200Z",
+        "ts": "2026-10-15T09:37:35.190Z",
         "confidence": "selector"
       }
     ],
@@ -260,7 +388,7 @@
       {
         "month": "2026-10",
         "price": 799,
-        "ts": "2026-10-15T08:02:40.546Z",
+        "ts": "2026-10-15T09:40:32.462Z",
         "confidence": "structured"
       }
     ],
@@ -268,7 +396,7 @@
       {
         "month": "2026-10",
         "price": 1010.47,
-        "ts": "2026-10-15T08:02:47.762Z",
+        "ts": "2026-10-15T09:40:41.555Z",
         "confidence": "structured"
       }
     ],
@@ -276,7 +404,7 @@
       {
         "month": "2026-10",
         "price": 955,
-        "ts": "2026-10-15T08:02:54.299Z",
+        "ts": "2026-10-15T09:40:48.086Z",
         "confidence": "structured"
       }
     ],
@@ -284,7 +412,7 @@
       {
         "month": "2026-10",
         "price": 4029,
-        "ts": "2026-10-15T08:03:24.285Z",
+        "ts": "2026-10-15T09:41:29.761Z",
         "confidence": "structured"
       }
     ],
@@ -292,7 +420,7 @@
       {
         "month": "2026-10",
         "price": 5239,
-        "ts": "2026-10-15T08:03:33.028Z",
+        "ts": "2026-10-15T09:41:39.947Z",
         "confidence": "structured"
       }
     ],
@@ -300,7 +428,7 @@
       {
         "month": "2026-10",
         "price": 726,
-        "ts": "2026-10-15T08:03:39.305Z",
+        "ts": "2026-10-15T09:41:50.014Z",
         "confidence": "structured"
       }
     ],
@@ -308,7 +436,7 @@
       {
         "month": "2026-10",
         "price": 789,
-        "ts": "2026-10-15T08:03:46.123Z",
+        "ts": "2026-10-15T09:41:56.564Z",
         "confidence": "structured"
       }
     ],
@@ -316,7 +444,7 @@
       {
         "month": "2026-10",
         "price": 1119,
-        "ts": "2026-10-15T08:03:53.032Z",
+        "ts": "2026-10-15T09:42:06.413Z",
         "confidence": "structured"
       }
     ],
@@ -324,7 +452,7 @@
       {
         "month": "2026-10",
         "price": 799,
-        "ts": "2026-10-15T08:05:09.299Z",
+        "ts": "2026-10-15T09:43:27.775Z",
         "confidence": "structured"
       }
     ],
@@ -332,7 +460,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-15T08:05:17.491Z",
+        "ts": "2026-10-15T09:43:36.991Z",
         "confidence": "structured"
       }
     ],
@@ -340,7 +468,7 @@
       {
         "month": "2026-10",
         "price": 888,
-        "ts": "2026-10-15T08:05:24.962Z",
+        "ts": "2026-10-15T09:43:46.548Z",
         "confidence": "structured"
       }
     ],
@@ -348,7 +476,7 @@
       {
         "month": "2026-10",
         "price": 2099,
-        "ts": "2026-10-15T08:05:44.553Z",
+        "ts": "2026-10-15T09:44:20.699Z",
         "confidence": "structured"
       }
     ],
@@ -356,7 +484,7 @@
       {
         "month": "2026-10",
         "price": 3599,
-        "ts": "2026-10-15T08:05:52.273Z",
+        "ts": "2026-10-15T09:44:29.553Z",
         "confidence": "structured"
       }
     ],
@@ -364,7 +492,7 @@
       {
         "month": "2026-10",
         "price": 4499,
-        "ts": "2026-10-15T08:06:02.145Z",
+        "ts": "2026-10-15T09:44:38.932Z",
         "confidence": "structured"
       }
     ],
@@ -372,7 +500,7 @@
       {
         "month": "2026-10",
         "price": 539,
-        "ts": "2026-10-15T08:06:11.237Z",
+        "ts": "2026-10-15T09:44:49.046Z",
         "confidence": "structured"
       }
     ],
@@ -380,7 +508,7 @@
       {
         "month": "2026-10",
         "price": 789,
-        "ts": "2026-10-15T08:06:17.488Z",
+        "ts": "2026-10-15T09:44:57.660Z",
         "confidence": "structured"
       }
     ],
@@ -388,7 +516,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-15T08:06:25.246Z",
+        "ts": "2026-10-15T09:45:07.601Z",
         "confidence": "structured"
       }
     ],
@@ -396,7 +524,7 @@
       {
         "month": "2026-10",
         "price": 1249,
-        "ts": "2026-10-15T08:06:36.206Z",
+        "ts": "2026-10-15T09:45:16.351Z",
         "confidence": "structured"
       }
     ],
@@ -504,38 +632,10 @@
         "price": 1049
       }
     ],
-    "SC305|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 799,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "confidence": "manual"
-      }
-    ],
-    "SC307|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 899
-      }
-    ],
     "SC203SET|sonovente": [
       {
         "month": "2026-10",
         "price": 499
-      }
-    ],
-    "TS107|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 539,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "confidence": "manual"
-      }
-    ],
-    "TS108|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 789
       }
     ],
     "EXO24|stars": [
@@ -785,116 +885,11 @@
         "price": 1249
       }
     ],
-    "SC4070|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 2099,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "TS110|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 999,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "SC3070L|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 1349,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "SC3070R|sonovente": [
-      {
-        "month": "2026-10",
-        "price": 1349,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
     "SC203SET|universsons": [
       {
         "month": "2026-10",
         "price": 499,
         "ts": "2026-10-15T09:10:50.388Z",
-        "confidence": "manual"
-      }
-    ],
-    "SC305|universsons": [
-      {
-        "month": "2026-10",
-        "price": 799,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "confidence": "manual"
-      }
-    ],
-    "SC307|universsons": [
-      {
-        "month": "2026-10",
-        "price": 899,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "TS107|universsons": [
-      {
-        "month": "2026-10",
-        "price": 539,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "confidence": "manual"
-      }
-    ],
-    "TS108|universsons": [
-      {
-        "month": "2026-10",
-        "price": 789,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "confidence": "manual"
-      }
-    ],
-    "TS110|universsons": [
-      {
-        "month": "2026-10",
-        "price": 999,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "SC4070|universsons": [
-      {
-        "month": "2026-10",
-        "price": 2099,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "SC3070L|universsons": [
-      {
-        "month": "2026-10",
-        "price": 1349,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
-        "confidence": "manual"
-      }
-    ],
-    "SC3070R|universsons": [
-      {
-        "month": "2026-10",
-        "price": 1349,
-        "ts": "2026-10-15T09:10:50.388Z",
-        "stock": "out",
         "confidence": "manual"
       }
     ]
