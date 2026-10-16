@@ -27,17 +27,18 @@ const PRODUCTS = [
   { id: "TS112", family: "TS", msrp: 1399 },
 ];
 
+// catalogUrl : page EVE Audio de l'enseigne (vérification humaine rapide)
 const RETAILERS = [
-  { id: "stars", name: "STAR's Music", country: "FR", site: "stars-music.fr" },
-  { id: "michenaud", name: "Michenaud", country: "FR", site: "michenaud.com" },
-  { id: "sonovente", name: "Sonovente", country: "FR", site: "sonovente.com" },
-  { id: "universsons", name: "Univers Sons", country: "FR", site: "univers-sons.com" },
-  { id: "thomann", name: "Thomann FR", country: "FR", site: "thomann.fr" },
-  { id: "musikstore", name: "Music Store", country: "DE", site: "musicstore.com" },
-  { id: "musikproductive", name: "Musik Produktiv", country: "DE", site: "musik-produktiv.fr" },
-  { id: "kmr", name: "KMR Audio", country: "DE", site: "kmraudio.com" },
-  { id: "musiker", name: "Muziker", country: "DE", site: "muziker.de" },
-  { id: "vonbroenner", name: "von broenner", country: "DE", site: "vonbroenner.de" },
+  { id: "stars", name: "STAR's Music", country: "FR", site: "stars-music.fr", catalogUrl: "https://www.stars-music.fr/enceinte-de-monitoring/eve-audio/" },
+  { id: "michenaud", name: "Michenaud", country: "FR", site: "michenaud.com", catalogUrl: "https://www.michenaud.com/m501-eve-audio/" },
+  { id: "sonovente", name: "Sonovente", country: "FR", site: "sonovente.com", catalogUrl: "https://www.sonovente.com/eve-audio-m586/enceinte-monitoring-c315/" },
+  { id: "universsons", name: "Univers Sons", country: "FR", site: "univers-sons.com", catalogUrl: "https://www.univers-sons.com/eve-audio-m586/audio-pro-c1235/" },
+  { id: "thomann", name: "Thomann FR", country: "FR", site: "thomann.fr", catalogUrl: "https://www.thomann.fr/cat_BF_eve_audio.html" },
+  { id: "musikstore", name: "Music Store", country: "DE", site: "musicstore.com", catalogUrl: "https://www.musicstore.com/fr_FR/EUR/brands/eve-audio" },
+  { id: "musikproductive", name: "Musik Produktiv", country: "DE", site: "musik-produktiv.fr", catalogUrl: "https://www.musik-produktiv.fr/marques/eve-audio/" },
+  { id: "kmr", name: "KMR Audio", country: "DE", site: "kmraudio.com", catalogUrl: "https://kmraudio.com/collections/eve-audio" },
+  { id: "musiker", name: "Muziker", country: "DE", site: "muziker.fr", catalogUrl: "https://www.muziker.fr/eve-audio" },
+  { id: "vonbroenner", name: "von Brönner", country: "DE", site: "vonbroenner.de", catalogUrl: "https://www.vonbroenner.de/collections/all-eve-audio-products" },
   { id: "gear4music", name: "Gear4Music", country: "UK", site: "gear4music.com" },
 ];
 
@@ -372,10 +373,21 @@ function PriceMatrix({ onSelect }) {
             </tr>
           </thead>
           <tbody>
-            {visibleProducts.map((p) => {
+            {visibleProducts.map((p, i) => {
               const s = marketStats(p.id);
+              const prevFamily = i > 0 ? visibleProducts[i - 1].family : null;
+              const showFamilyHeader = p.family !== prevFamily;
+              const FAMILY_LABEL = { EXO: "Enceintes EXO", SC: "Moniteurs SC", TS: "Caissons de basses TS" };
               return (
-                <tr key={p.id} className="border-t border-slate-100 hover:bg-slate-50">
+                <React.Fragment key={p.id}>
+                  {showFamilyHeader && (
+                    <tr className="bg-slate-100/70">
+                      <td colSpan={RETAILERS.length + 6} className="px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                        {FAMILY_LABEL[p.family]}
+                      </td>
+                    </tr>
+                  )}
+                <tr className="border-t border-slate-100 hover:bg-slate-50">
                   <td className="sticky left-0 z-10 bg-white px-4 py-2.5">
                     <button onClick={() => onSelect(p.id)} className="text-left">
                       <div className="font-semibold text-slate-900 hover:underline">{p.id}</div>
@@ -428,6 +440,9 @@ function PriceMatrix({ onSelect }) {
                         </div>
                         <div className="flex items-center justify-center gap-1 text-[10px]">
                           <span style={{ color: fr.color }}>{fr.char}</span>
+                          <span className="font-medium text-slate-500">
+                            {gapPct > 0 ? "+" : ""}{(gapPct * 100).toFixed(0)}%
+                          </span>
                           {trend !== 0 && (
                             <span className={trend < 0 ? "text-emerald-700" : "text-red-700"}>
                               {trend < 0 ? "▼" : "▲"}
@@ -475,6 +490,7 @@ function PriceMatrix({ onSelect }) {
                     </td>
                   )}
                 </tr>
+                </React.Fragment>
               );
             })}
           </tbody>
@@ -595,7 +611,15 @@ function ProductDetail({ pid, onBack }) {
                       <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700">En stock</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-sky-600">{o.r.site}</td>
+                  <td className="px-4 py-3 text-xs">
+                    {o.r.catalogUrl ? (
+                      <a href={o.r.catalogUrl} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">
+                        {o.r.site} ↗
+                      </a>
+                    ) : (
+                      <span className="text-sky-600">{o.r.site}</span>
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -610,46 +634,91 @@ function ProductDetail({ pid, onBack }) {
 // Vue revendeurs : positionnement de chaque enseigne sur tout le catalogue
 // ------------------------------------------------------------------
 function RetailerView() {
-  const rows = RETAILERS.map((r) => ({ r, s: retailerStats(r.id) }))
+  const cards = RETAILERS.map((r) => ({ r, s: retailerStats(r.id) }))
     .filter((x) => x.s)
     .sort((a, b) => a.s.avgGapPct - b.s.avgGapPct);
 
+  // v9 : un revendeur est en "collecte auto" si au moins un de ses prix
+  // est horodaté par le scraper (sinon veille manuelle)
+  const isAuto = (rid) =>
+    Object.values(HISTORY).some((h) => h.retailer === rid && h.ts);
+
   return (
     <div className="space-y-5">
-      <h2 className="text-xl font-bold text-slate-900">🏬 Positionnement marché par revendeur (catalogue complet)</h2>
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
-            <tr>
-              <th className="px-4 py-3">Revendeur</th>
-              <th className="px-4 py-3">Pays</th>
-              <th className="px-4 py-3">Réf. trackées</th>
-              <th className="px-4 py-3">Écart moyen au MSRP</th>
-              <th className="px-4 py-3">Var. moyenne 1 mois</th>
-              <th className="px-4 py-3">Prix en mouvement</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((x) => (
-              <tr key={x.r.id} className="border-t border-slate-100 hover:bg-slate-50">
-                <td className="px-4 py-3 font-medium text-slate-900">{x.r.name}</td>
-                <td className="px-4 py-3">{COUNTRY_FLAG[x.r.country]} {x.r.country}</td>
-                <td className="px-4 py-3 text-slate-600">{x.s.n} / {PRODUCTS.length}</td>
-                <td className="px-4 py-3">
-                  <span className={`font-bold ${x.s.avgGapPct <= -4 ? "text-emerald-700" : x.s.avgGapPct <= 0 ? "text-lime-700" : "text-red-700"}`}>
-                    {x.s.avgGapPct > 0 ? "+" : ""}{x.s.avgGapPct.toFixed(1)}%
-                  </span>
-                </td>
-                <td className={`px-4 py-3 font-medium ${x.s.avgDelta1m <= 0 ? "text-emerald-600" : "text-red-600"}`}>
+      <div>
+        <h2 className="text-xl font-bold text-slate-900">🏬 Positionnement marché par revendeur (catalogue complet)</h2>
+        <p className="text-sm text-slate-500">
+          Trié du moins cher au plus cher (écart moyen au MSRP). Le lien de chaque enseigne ouvre sa page EVE Audio pour vérifier les prix en direct.
+        </p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {cards.map((x, i) => (
+          <div
+            key={x.r.id}
+            className={`rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md ${
+              i === 0 ? "border-emerald-300 ring-1 ring-emerald-200" : "border-slate-200"
+            }`}
+          >
+            <div className="mb-3 flex items-start justify-between gap-2">
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-lg">{COUNTRY_FLAG[x.r.country]}</span>
+                  <span className="font-bold text-slate-900">{x.r.name}</span>
+                  {i === 0 && (
+                    <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+                      Meilleur prix moyen
+                    </span>
+                  )}
+                </div>
+                <div className="mt-0.5 text-[11px] text-slate-400">{x.r.site}</div>
+              </div>
+              <span
+                className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                  isAuto(x.r.id) ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"
+                }`}
+                title={isAuto(x.r.id)
+                  ? "Prix collectés automatiquement chaque matin par le scraper"
+                  : "Prix alimentés par veille manuelle (site anti-bot)"}
+              >
+                {isAuto(x.r.id) ? "✅ Collecte auto" : "✍️ Veille manuelle"}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="rounded-lg bg-slate-50 px-3 py-2">
+                <div className="text-[10px] uppercase tracking-wide text-slate-400">Réf. trackées</div>
+                <div className="font-bold text-slate-800">{x.s.n} / {PRODUCTS.length}</div>
+              </div>
+              <div className="rounded-lg bg-slate-50 px-3 py-2">
+                <div className="text-[10px] uppercase tracking-wide text-slate-400">Écart moyen MSRP</div>
+                <div className={`font-bold ${x.s.avgGapPct <= -4 ? "text-emerald-700" : x.s.avgGapPct <= 0 ? "text-lime-700" : "text-red-700"}`}>
+                  {x.s.avgGapPct > 0 ? "+" : ""}{x.s.avgGapPct.toFixed(1)}%
+                </div>
+              </div>
+              <div className="rounded-lg bg-slate-50 px-3 py-2">
+                <div className="text-[10px] uppercase tracking-wide text-slate-400">Var. moyenne 1 mois</div>
+                <div className={`font-bold ${x.s.avgDelta1m <= 0 ? "text-emerald-700" : "text-red-700"}`}>
                   {x.s.avgDelta1m > 0 ? "+" : ""}{x.s.avgDelta1m.toFixed(2)} €
-                </td>
-                <td className="px-4 py-3 text-slate-600">
-                  {x.s.changes} réf. {x.s.changes > 1 ? "modifiées" : "modifiée"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </div>
+              </div>
+              <div className="rounded-lg bg-slate-50 px-3 py-2">
+                <div className="text-[10px] uppercase tracking-wide text-slate-400">Prix en mouvement</div>
+                <div className="font-bold text-slate-800">{x.s.changes} réf.</div>
+              </div>
+            </div>
+
+            {x.r.catalogUrl && (
+              <a
+                href={x.r.catalogUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 transition hover:bg-sky-100"
+              >
+                🔗 Page EVE Audio de l'enseigne ↗
+              </a>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
