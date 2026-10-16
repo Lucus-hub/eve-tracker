@@ -648,14 +648,13 @@ function RetailerView() {
       <div>
         <h2 className="text-xl font-bold text-slate-900">🏬 Positionnement marché par revendeur</h2>
         <p className="text-sm text-slate-500">
-          Du moins cher au plus cher. Le nom d'une enseigne ouvre sa page EVE Audio (vérification en direct).
+          Du discount le plus agressif au prix le plus préservé — l'écart au MSRP suit le même code couleur que la matrice. Le nom d'une enseigne ouvre sa page EVE Audio.
         </p>
       </div>
       <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
         <table className="w-full text-sm">
           <thead className="bg-slate-50 text-left text-[11px] uppercase tracking-wide text-slate-500">
             <tr>
-              <th className="px-3 py-2.5 text-center">#</th>
               <th className="px-3 py-2.5">Revendeur</th>
               <th className="px-3 py-2.5">Collecte</th>
               <th className="px-3 py-2.5 text-center">Réf. trackées</th>
@@ -665,11 +664,8 @@ function RetailerView() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((x, i) => (
+            {rows.map((x) => (
               <tr key={x.r.id} className="border-t border-slate-100 hover:bg-slate-50">
-                <td className="px-3 py-2 text-center text-xs font-semibold text-slate-400">
-                  {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}
-                </td>
                 <td className="px-3 py-2">
                   {x.r.catalogUrl ? (
                     <a
@@ -699,15 +695,12 @@ function RetailerView() {
                   </span>
                 </td>
                 <td className="px-3 py-2 text-center text-slate-700">{x.s.n} / {PRODUCTS.length}</td>
-                <td className="px-3 py-2 text-center">
-                  <span
-                    className={`font-bold ${
-                      x.s.avgGapPct <= -6 ? "text-emerald-700"
-                      : x.s.avgGapPct <= -3 ? "text-lime-700"
-                      : x.s.avgGapPct <= 0 ? "text-slate-700"
-                      : "text-red-700"
-                    }`}
-                  >
+                <td
+                  className="px-3 py-2 text-center"
+                  style={{ background: heatColor(x.s.avgGapPct / 100) }}
+                  title={`Écart moyen au MSRP sur ${x.s.n} références (hors ruptures) — même code couleur que la matrice`}
+                >
+                  <span className="font-bold text-slate-800">
                     {x.s.avgGapPct > 0 ? "+" : ""}{x.s.avgGapPct.toFixed(1)}%
                   </span>
                 </td>
