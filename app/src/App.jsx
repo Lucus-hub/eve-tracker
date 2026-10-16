@@ -634,92 +634,95 @@ function ProductDetail({ pid, onBack }) {
 // Vue revendeurs : positionnement de chaque enseigne sur tout le catalogue
 // ------------------------------------------------------------------
 function RetailerView() {
-  const cards = RETAILERS.map((r) => ({ r, s: retailerStats(r.id) }))
+  const rows = RETAILERS.map((r) => ({ r, s: retailerStats(r.id) }))
     .filter((x) => x.s)
     .sort((a, b) => a.s.avgGapPct - b.s.avgGapPct);
 
-  // v9 : un revendeur est en "collecte auto" si au moins un de ses prix
+  // un revendeur est en "collecte auto" si au moins un de ses prix
   // est horodaté par le scraper (sinon veille manuelle)
   const isAuto = (rid) =>
     Object.values(HISTORY).some((h) => h.retailer === rid && h.ts);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-slate-900">🏬 Positionnement marché par revendeur (catalogue complet)</h2>
+        <h2 className="text-xl font-bold text-slate-900">🏬 Positionnement marché par revendeur</h2>
         <p className="text-sm text-slate-500">
-          Trié du moins cher au plus cher (écart moyen au MSRP). Le lien de chaque enseigne ouvre sa page EVE Audio pour vérifier les prix en direct.
+          Du moins cher au plus cher. Le nom d'une enseigne ouvre sa page EVE Audio (vérification en direct).
         </p>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {cards.map((x, i) => (
-          <div
-            key={x.r.id}
-            className={`rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md ${
-              i === 0 ? "border-emerald-300 ring-1 ring-emerald-200" : "border-slate-200"
-            }`}
-          >
-            <div className="mb-3 flex items-start justify-between gap-2">
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-lg">{COUNTRY_FLAG[x.r.country]}</span>
-                  <span className="font-bold text-slate-900">{x.r.name}</span>
-                  {i === 0 && (
-                    <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-                      Meilleur prix moyen
-                    </span>
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table className="w-full text-sm">
+          <thead className="bg-slate-50 text-left text-[11px] uppercase tracking-wide text-slate-500">
+            <tr>
+              <th className="px-3 py-2.5 text-center">#</th>
+              <th className="px-3 py-2.5">Revendeur</th>
+              <th className="px-3 py-2.5">Collecte</th>
+              <th className="px-3 py-2.5 text-center">Réf. trackées</th>
+              <th className="px-3 py-2.5 text-center">Écart moyen MSRP</th>
+              <th className="px-3 py-2.5 text-center">Var. 1 mois</th>
+              <th className="px-3 py-2.5 text-center">Prix en mouvement</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((x, i) => (
+              <tr key={x.r.id} className="border-t border-slate-100 hover:bg-slate-50">
+                <td className="px-3 py-2 text-center text-xs font-semibold text-slate-400">
+                  {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}
+                </td>
+                <td className="px-3 py-2">
+                  {x.r.catalogUrl ? (
+                    <a
+                      href={x.r.catalogUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-slate-900 hover:text-sky-700 hover:underline"
+                      title={`Ouvrir la page EVE Audio de ${x.r.name}`}
+                    >
+                      {COUNTRY_FLAG[x.r.country]} {x.r.name} <span className="text-sky-500">↗</span>
+                    </a>
+                  ) : (
+                    <span className="font-semibold text-slate-900">{COUNTRY_FLAG[x.r.country]} {x.r.name}</span>
                   )}
-                </div>
-                <div className="mt-0.5 text-[11px] text-slate-400">{x.r.site}</div>
-              </div>
-              <span
-                className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-                  isAuto(x.r.id) ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"
-                }`}
-                title={isAuto(x.r.id)
-                  ? "Prix collectés automatiquement chaque matin par le scraper"
-                  : "Prix alimentés par veille manuelle (site anti-bot)"}
-              >
-                {isAuto(x.r.id) ? "✅ Collecte auto" : "✍️ Veille manuelle"}
-              </span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
-                <div className="text-[10px] uppercase tracking-wide text-slate-400">Réf. trackées</div>
-                <div className="font-bold text-slate-800">{x.s.n} / {PRODUCTS.length}</div>
-              </div>
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
-                <div className="text-[10px] uppercase tracking-wide text-slate-400">Écart moyen MSRP</div>
-                <div className={`font-bold ${x.s.avgGapPct <= -4 ? "text-emerald-700" : x.s.avgGapPct <= 0 ? "text-lime-700" : "text-red-700"}`}>
-                  {x.s.avgGapPct > 0 ? "+" : ""}{x.s.avgGapPct.toFixed(1)}%
-                </div>
-              </div>
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
-                <div className="text-[10px] uppercase tracking-wide text-slate-400">Var. moyenne 1 mois</div>
-                <div className={`font-bold ${x.s.avgDelta1m <= 0 ? "text-emerald-700" : "text-red-700"}`}>
+                  <div className="text-[10px] text-slate-400">{x.r.site}</div>
+                </td>
+                <td className="px-3 py-2">
+                  <span
+                    className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                      isAuto(x.r.id) ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"
+                    }`}
+                    title={isAuto(x.r.id)
+                      ? "Prix collectés automatiquement chaque matin par le scraper"
+                      : "Prix alimentés par veille manuelle (site anti-bot)"}
+                  >
+                    {isAuto(x.r.id) ? "✅ Auto" : "✍️ Manuelle"}
+                  </span>
+                </td>
+                <td className="px-3 py-2 text-center text-slate-700">{x.s.n} / {PRODUCTS.length}</td>
+                <td className="px-3 py-2 text-center">
+                  <span
+                    className={`font-bold ${
+                      x.s.avgGapPct <= -6 ? "text-emerald-700"
+                      : x.s.avgGapPct <= -3 ? "text-lime-700"
+                      : x.s.avgGapPct <= 0 ? "text-slate-700"
+                      : "text-red-700"
+                    }`}
+                  >
+                    {x.s.avgGapPct > 0 ? "+" : ""}{x.s.avgGapPct.toFixed(1)}%
+                  </span>
+                </td>
+                <td className={`px-3 py-2 text-center font-medium ${x.s.avgDelta1m <= 0 ? "text-emerald-600" : "text-red-600"}`}>
                   {x.s.avgDelta1m > 0 ? "+" : ""}{x.s.avgDelta1m.toFixed(2)} €
-                </div>
-              </div>
-              <div className="rounded-lg bg-slate-50 px-3 py-2">
-                <div className="text-[10px] uppercase tracking-wide text-slate-400">Prix en mouvement</div>
-                <div className="font-bold text-slate-800">{x.s.changes} réf.</div>
-              </div>
-            </div>
-
-            {x.r.catalogUrl && (
-              <a
-                href={x.r.catalogUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 transition hover:bg-sky-100"
-              >
-                🔗 Page EVE Audio de l'enseigne ↗
-              </a>
-            )}
-          </div>
-        ))}
+                </td>
+                <td className="px-3 py-2 text-center text-slate-600">{x.s.changes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+      <p className="text-xs text-slate-400">
+        Écart moyen au MSRP = moyenne de l'écart de chaque référence trackée chez l'enseigne (hors ruptures). Cliquez sur un revendeur pour vérifier ses prix sur son site.
+      </p>
     </div>
   );
 }
