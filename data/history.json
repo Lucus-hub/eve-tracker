@@ -1067,6 +1067,30 @@
         "stock": "out",
         "confidence": "manual"
       }
+    ],
+    "EXO28|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 849,
+        "ts": "2026-10-19T16:30:00.000Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC203SET|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 549,
+        "ts": "2026-10-19T16:30:00.000Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC203SET|musikproductive": [
+      {
+        "month": "2026-10",
+        "price": 499,
+        "ts": "2026-10-19T16:30:00.000Z",
+        "confidence": "manual"
+      }
     ]
   }
 }

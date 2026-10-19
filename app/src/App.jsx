@@ -425,7 +425,7 @@ function PriceMatrix({ onSelect }) {
                       <td
                         key={r.id}
                         className={`border-b border-slate-100 px-2 py-2.5 ${
-                          isBest ? "outline outline-2 -outline-offset-2 outline-emerald-500" : ""
+                          ""
                         }`}
                         style={{ background: heatColor(gapPct), color: heatText(gapPct) }}
                         title={`${r.name} · ${eur(h.current)} · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · var. 1 mois ${trend > 0 ? "+" : ""}${trend} €${h.stock === "low" ? " · stock faible" : ""} · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}${suspicious ? " · ⚠ prix atypique vs marché (à vérifier)" : ""}${isBest ? " · MEILLEUR PRIX du marché" : ""}`}
@@ -511,7 +511,7 @@ function PriceMatrix({ onSelect }) {
         <span className="flex items-center gap-1"><span style={{ color: "#dc2626" }}>●</span> périmé</span>
         <span className="flex items-center gap-1"><span style={{ color: "#94a3b8" }}>●</span> non daté</span>
         <span className="h-4 w-px bg-slate-200" />
-        <span className="flex items-center gap-1"><span className="inline-block h-3.5 w-3.5 rounded-md ring-2 ring-emerald-500 ring-offset-1" /> meilleur prix du marché</span>
+        
         <span>⚠ prix atypique</span>
         <span>⛔ rupture</span>
         <span>▼/▲ variation vs mois précédent</span>
@@ -756,7 +756,7 @@ export default function App() {
       <div className="mx-auto max-w-[1400px] space-y-6">
         <header className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">🔊 Veille tarifaire EVE Audio — état du marché</h1>
+            <h1 className="text-2xl font-bold text-slate-900">🔊 Veille tarifaire EVE Audio</h1>
             <p className="text-sm text-slate-500">
               {DATA_SOURCE} · {PRODUCTS.length} références × {RETAILERS.length} revendeurs (FR · DE)
             </p>
