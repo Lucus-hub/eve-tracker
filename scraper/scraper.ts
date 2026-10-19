@@ -46,7 +46,7 @@ const ALLOWED_DOMAINS = [
   "stars-music.com", "stars-music.fr", "michenaud.com", "sonovente.com", "univers-sons.com",
   "thomann.fr", "musicstore.com", "musik-produktiv.fr",
   "kmraudio.com", "kmraudio.de", "muziker.fr", "muziker.com", "muziker.de",
-  "vonbroenner.de", "gear4music.com", "gear4music.fr",
+  "vonbroenner.de",
 ];
 function isAllowedUrl(url: string): boolean {
   try {
@@ -194,15 +194,6 @@ const retailers: Retailer[] = [
     priceSelectors: [".price", "[itemprop=price]"],
     resultItem: ".product, .type-product",
   },
-  {
-    id: "gear4music", name: "Gear4Music", country: "UK", currency: "GBP", locale: "fr-FR",
-    // fiches gear4music.fr observÃ©es : /77WE (EXO24), /77WG (EXO27), /77WI (EXO28)
-    productUrl: (ref) => (g4mIds[ref] ? `https://www.gear4music.fr/Recording-and-Computers/EVE-Audio-EXO-${ref.slice(3)}-Active-Studio-Monitor/${g4mIds[ref]}` : null),
-    searchUrl: (q) => `https://www.gear4music.fr/search?q=${encodeURIComponent(q)}`,
-    priceSelectors: [".product-price", "[itemprop=price]", ".price"],
-    strikethroughSelector: ".was-price, .rrp",
-    resultItem: ".product-grid-item, .product-card",
-  },
 ];
 
 // ----------------------------------------------------------------------------
@@ -261,7 +252,6 @@ const musicStoreSlug: Record<string, string> = {
   "TS107": "EVE-audio-TS-107-Subwoofer-", "TS108": "EVE-audio-TS-108-Subwoofer-",
   "TS110": "EVE-audio-TS-110-Subwoofer-", "TS112": "EVE-audio-TS-112-Subwoofer-",
 };
-const g4mIds: Record<string, string> = { "EXO24": "77WE", "EXO27": "77WG", "EXO28": "77WI" };
 
 // v7 â EXCLUSIONS PAR REVENDEUR : couples produitÃrevendeur Ã  NE JAMAIS
 // collecter automatiquement (prix ambigu dÃ©tectÃ© en production, ex. KMR ne

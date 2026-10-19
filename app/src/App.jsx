@@ -28,6 +28,7 @@ const PRODUCTS = [
 ];
 
 // catalogUrl : page EVE Audio de l'enseigne (vérification humaine rapide)
+// v14 : Gear4Music retire du suivi (demande du 19/10/2026).
 const RETAILERS = [
   { id: "stars", name: "STAR's Music", country: "FR", site: "stars-music.fr", catalogUrl: "https://www.stars-music.fr/enceinte-de-monitoring/eve-audio/" },
   { id: "michenaud", name: "Michenaud", country: "FR", site: "michenaud.com", catalogUrl: "https://www.michenaud.com/m501-eve-audio/" },
@@ -39,10 +40,9 @@ const RETAILERS = [
   { id: "kmr", name: "KMR Audio", country: "DE", site: "kmraudio.com", catalogUrl: "https://kmraudio.com/collections/eve-audio" },
   { id: "musiker", name: "Muziker", country: "DE", site: "muziker.fr", catalogUrl: "https://www.muziker.fr/eve-audio" },
   { id: "vonbroenner", name: "von Brönner", country: "DE", site: "vonbroenner.de", catalogUrl: "https://www.vonbroenner.de/collections/all-eve-audio-products" },
-  { id: "gear4music", name: "Gear4Music", country: "UK", site: "gear4music.com" },
 ];
 
-const COUNTRY_FLAG = { FR: "🇫🇷", DE: "🇩🇪", UK: "🇬🇧" };
+const COUNTRY_FLAG = { FR: "🇫🇷", DE: "🇩🇪" };
 
 // ------------------------------------------------------------------
 // CONNECTEUR BACKEND — alimentation par le scraper (data/history.json)
@@ -228,6 +228,14 @@ function heatColor(gapPct) {
   return "#ef4444";
 }
 
+/** texte lisible sur fond heat : foncé sur fonds clairs, blanc sur fonds saturés */
+function heatText(gapPct) {
+  const a = Math.abs(gapPct);
+  if (a > 0.20) return "#ffffff";
+  if (a > 0.10) return "#064e3b";
+  return "#1e293b";
+}
+
 /** stats de marché d'une référence (sur les offres actives) */
 function marketStats(pid) {
   const p = PRODUCTS.find((x) => x.id === pid);
@@ -268,7 +276,7 @@ function retailerStats(rid) {
   });
   const avgGapPct = gaps.reduce((s, g) => s + g, 0) / gaps.length;
   const deltas = entries.map((h) => h.delta1m);
-  const avgDelta1m = deltas.reduce((s, v) => s + v, 0) / deltas.length;
+  const avgDelta1m = deltas.reduce((s, v) => s + v, 0) / entries.length;
   const changes = entries.filter((h) => h.delta1m !== 0).length;
   return { n: entries.length, avgGapPct, avgDelta1m, changes };
 }
@@ -282,6 +290,8 @@ function PriceMatrix({ onSelect }) {
 
   const families = ["ALL", "EXO", "SC", "TS"];
   const familyOrder = { EXO: 0, SC: 1, TS: 2 };
+  const FAMILY_LABEL = { EXO: "Enceintes EXO", SC: "Moniteurs SC", TS: "Caissons de basses TS" };
+  const FAMILY_ACCENT = { EXO: "#0ea5e9", SC: "#8b5cf6", TS: "#f97316" };
   const visibleProducts = useMemo(
     () =>
       PRODUCTS
@@ -299,16 +309,26 @@ function PriceMatrix({ onSelect }) {
     [family, sortBy]
   );
 
+  // pastille de prix : fond heat + bordure douce, texte contrasté
+  const priceChip = (gapPct, extra = "") => ({
+    background: heatColor(gapPct),
+    color: heatText(gapPct),
+    border: "1px solid rgba(15,23,42,0.08)",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.35)",
+  });
+
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm">
         <span className="text-sm font-medium text-slate-600">Série :</span>
         {families.map((f) => (
           <button
             key={f}
             onClick={() => setFamily(f)}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-              family === f ? "bg-slate-900 text-white" : "bg-white text-slate-600 hover:bg-slate-200"
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+              family === f
+                ? "bg-slate-900 text-white shadow"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
             }`}
           >
             {f === "ALL" ? "Toutes" : f}
@@ -323,53 +343,34 @@ function PriceMatrix({ onSelect }) {
           <button
             key={s.id}
             onClick={() => setSortBy(s.id)}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-              sortBy === s.id ? "bg-slate-900 text-white" : "bg-white text-slate-600 hover:bg-slate-200"
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+              sortBy === s.id
+                ? "bg-slate-900 text-white shadow"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
             }`}
           >
             {s.label}
           </button>
         ))}
-        <div className="ml-auto flex items-center gap-1 text-[11px] text-slate-500">
-          <span>Légende écart MSRP :</span>
-          {[
-            { l: "≥ MSRP", c: heatColor(0.03) },
-            { l: "Au MSRP", c: heatColor(0) },
-            { l: "0 à -4%", c: heatColor(-0.03) },
-            { l: "-4 à -8%", c: heatColor(-0.06) },
-            { l: "< -8%", c: heatColor(-0.1) },
-          ].map((x) => (
-            <span key={x.l} className="flex items-center gap-1">
-              <span className="inline-block h-3 w-3 rounded-sm" style={{ background: x.c }} />
-              {x.l}
-            </span>
-          ))}
-          <span className="ml-3">Fraîcheur :</span>
-          <span className="flex items-center gap-1"><span style={{ color: "#16a34a" }}>●</span> &lt; 2 j</span>
-          <span className="flex items-center gap-1"><span style={{ color: "#f59e0b" }}>●</span> &lt; 7 j</span>
-          <span className="flex items-center gap-1"><span style={{ color: "#dc2626" }}>●</span> périmé</span>
-          <span className="flex items-center gap-1"><span style={{ color: "#94a3b8" }}>●</span> non daté</span>
-          <span className="flex items-center gap-1">⚠ prix atypique vs marché</span>
-        </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full min-w-[1100px] text-sm">
+      <div className="overflow-x-auto rounded-2xl bg-white shadow-lg shadow-slate-300/40 ring-1 ring-slate-200">
+        <table className="w-full min-w-[1100px] border-separate border-spacing-0 text-sm">
           <thead>
-            <tr className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-              <th className="sticky left-0 z-10 bg-slate-50 px-4 py-3 text-left">Référence</th>
-              <th className="px-3 py-3 text-right">MSRP</th>
+            <tr className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-[11px] uppercase tracking-wider text-slate-300">
+              <th className="sticky left-0 z-20 bg-slate-900 px-4 py-3.5 text-left font-semibold text-white">Référence</th>
+              <th className="px-3 py-3.5 text-right font-semibold">MSRP</th>
               {RETAILERS.map((r) => (
-                <th key={r.id} className="px-3 py-3 text-center">
-                  <div className="font-semibold text-slate-700">{r.name}</div>
-                  <div className="text-[10px] normal-case text-slate-400">{COUNTRY_FLAG[r.country]} {r.country}</div>
+                <th key={r.id} className="border-l border-white/10 px-3 py-3.5 text-center font-semibold">
+                  <div className="text-slate-100">{COUNTRY_FLAG[r.country]} {r.name}</div>
+                  <div className="text-[10px] normal-case tracking-normal text-slate-400">{r.site}</div>
                 </th>
               ))}
-              <th className="px-3 py-3 text-center">Prix min</th>
-              <th className="px-3 py-3 text-center">Prix max</th>
-              <th className="px-3 py-3 text-center">Moy. marché</th>
-              <th className="px-3 py-3 text-center">Écart moy.</th>
-              <th className="px-3 py-3 text-center">Dispersion</th>
+              <th className="border-l-2 border-white/20 bg-slate-950/60 px-3 py-3.5 text-center font-semibold text-emerald-300">Prix min</th>
+              <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold text-rose-300">Prix max</th>
+              <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold">Moy. marché</th>
+              <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold">Écart moy.</th>
+              <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold">Dispersion</th>
             </tr>
           </thead>
           <tbody>
@@ -377,116 +378,118 @@ function PriceMatrix({ onSelect }) {
               const s = marketStats(p.id);
               const prevFamily = i > 0 ? visibleProducts[i - 1].family : null;
               const showFamilyHeader = p.family !== prevFamily;
-              const FAMILY_LABEL = { EXO: "Enceintes EXO", SC: "Moniteurs SC", TS: "Caissons de basses TS" };
               return (
                 <React.Fragment key={p.id}>
                   {showFamilyHeader && (
-                    <tr className="bg-slate-100/70">
-                      <td colSpan={RETAILERS.length + 6} className="px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
-                        {FAMILY_LABEL[p.family]}
+                    <tr>
+                      <td colSpan={RETAILERS.length + 6} className="border-b border-slate-200 bg-slate-50 px-4 py-2">
+                        <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+                          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: FAMILY_ACCENT[p.family] }} />
+                          {FAMILY_LABEL[p.family]}
+                        </span>
                       </td>
                     </tr>
                   )}
-                <tr className="border-t border-slate-100 hover:bg-slate-50">
-                  <td className="sticky left-0 z-10 bg-white px-4 py-2.5">
+                <tr className="group border-t border-slate-100 transition-colors even:bg-slate-50/40 hover:bg-sky-50/50">
+                  <td className="sticky left-0 z-10 border-b border-slate-100 bg-white px-4 py-2.5 group-hover:bg-sky-50/80">
                     <button onClick={() => onSelect(p.id)} className="text-left">
-                      <div className="font-semibold text-slate-900 hover:underline">{p.id}</div>
-                      <div className="text-[10px] text-slate-400">Série {p.family}</div>
+                      <div className="font-semibold text-slate-900 decoration-sky-400 decoration-2 underline-offset-4 hover:underline">{p.id}</div>
+                      <div className="text-[10px] font-medium uppercase tracking-wide" style={{ color: FAMILY_ACCENT[p.family] }}>{p.family}</div>
                     </button>
                   </td>
-                  <td className="px-3 py-2.5 text-right font-medium text-slate-600">{eurShort(p.msrp)}</td>
+                  <td className="border-b border-slate-100 px-3 py-2.5 text-right font-medium text-slate-500">{eurShort(p.msrp)}</td>
                   {RETAILERS.map((r) => {
                     const h = HISTORY[key(p.id, r.id)];
+                    const isBest = s && h && h.stock !== "out" && s.minRetailer === r.id;
                     if (!h) {
                       return (
-                        <td key={r.id} className="px-3 py-2.5 text-center text-slate-300">
-                          <span className="text-[11px]">— n/r</span>
-                        </td>
-                      );
-                    }
-                    if (h.stock === "out") {
-                      // Rupture : le prix reste une info de marché → affiché, grisé, marqué ⛔
-                      const gapPct = (h.current - p.msrp) / p.msrp;
-                      const fr = freshnessDot(h.ts);
-                      return (
-                        <td
-                          key={r.id}
-                          className="px-2 py-2.5 text-center"
-                          style={{ background: heatColor(gapPct), opacity: 0.55 }}
-                          title={`${r.name} · ${eur(h.current)} · RUPTURE chez le revendeur · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}`}
-                        >
-                          <div className="font-semibold text-slate-500 line-through">{eurShort(h.current)}</div>
-                          <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500">
-                            <span>⛔</span>
-                            <span style={{ color: fr.color }}>{fr.char}</span>
-                          </div>
+                        <td key={r.id} className="border-b border-slate-100 px-2 py-2.5 text-center">
+                          <span className="text-[11px] text-slate-300">— n/r</span>
                         </td>
                       );
                     }
                     const gapPct = (h.current - p.msrp) / p.msrp;
-                    const trend = h.delta1m;
                     const fr = freshnessDot(h.ts);
+                    if (h.stock === "out") {
+                      // Rupture : le prix reste une info de marché → affiché grisé, marqué ⛔
+                      return (
+                        <td key={r.id} className="border-b border-slate-100 px-1.5 py-2 text-center">
+                          <div
+                            className="mx-auto w-fit min-w-[64px] rounded-lg px-2.5 py-1.5 opacity-60"
+                            style={priceChip(gapPct)}
+                            title={`${r.name} · ${eur(h.current)} · RUPTURE chez le revendeur · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}`}
+                          >
+                            <div className="font-semibold text-slate-500 line-through">{eurShort(h.current)}</div>
+                            <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500">
+                              <span>⛔</span>
+                              <span style={{ color: fr.color }}>{fr.char}</span>
+                            </div>
+                          </div>
+                        </td>
+                      );
+                    }
+                    const trend = h.delta1m;
                     const suspicious = isSuspicious(p.id, h.current);
                     return (
-                      <td
-                        key={r.id}
-                        className="px-2 py-2.5 text-center"
-                        style={{ background: heatColor(gapPct) }}
-                        title={`${r.name} · ${eur(h.current)} · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · var. 1 mois ${trend > 0 ? "+" : ""}${trend} €${h.stock === "low" ? " · stock faible" : ""} · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}${suspicious ? " · ⚠ prix atypique vs marché (à vérifier)" : ""}`}
-                      >
-                        <div className="font-semibold text-slate-800">
-                          {eurShort(h.current)}
-                          {suspicious && <span className="ml-1 text-amber-600">⚠</span>}
-                        </div>
-                        <div className="flex items-center justify-center gap-1 text-[10px]">
-                          <span style={{ color: fr.color }}>{fr.char}</span>
-                          <span className="font-medium text-slate-500">
-                            {gapPct > 0 ? "+" : ""}{(gapPct * 100).toFixed(0)}%
-                          </span>
-                          {trend !== 0 && (
-                            <span className={trend < 0 ? "text-emerald-700" : "text-red-700"}>
-                              {trend < 0 ? "▼" : "▲"}
+                      <td key={r.id} className="border-b border-slate-100 px-1.5 py-2 text-center">
+                        <div
+                          className={`mx-auto w-fit min-w-[64px] rounded-lg px-2.5 py-1.5 transition-transform duration-150 hover:scale-[1.05] ${
+                            isBest ? "ring-2 ring-emerald-500 ring-offset-1" : ""
+                          }`}
+                          style={priceChip(gapPct)}
+                          title={`${r.name} · ${eur(h.current)} · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · var. 1 mois ${trend > 0 ? "+" : ""}${trend} €${h.stock === "low" ? " · stock faible" : ""} · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}${suspicious ? " · ⚠ prix atypique vs marché (à vérifier)" : ""}${isBest ? " · MEILLEUR PRIX du marché" : ""}`}
+                        >
+                          <div className="font-semibold leading-tight">
+                            {eurShort(h.current)}
+                            {suspicious && <span className="ml-1">⚠</span>}
+                          </div>
+                          <div className="flex items-center justify-center gap-1.5 text-[10px] leading-none">
+                            <span style={{ color: fr.color }}>{fr.char}</span>
+                            <span className="font-semibold opacity-80">
+                              {gapPct > 0 ? "+" : ""}{(gapPct * 100).toFixed(0)}%
                             </span>
-                          )}
-                          {h.stock === "low" && <span className="text-amber-700">⚑</span>}
+                            {trend !== 0 && (
+                              <span className="font-bold" style={{ color: trend < 0 ? "#047857" : "#b91c1c" }}>
+                                {trend < 0 ? "▼" : "▲"}
+                              </span>
+                            )}
+                            {h.stock === "low" && <span>⚑</span>}
+                          </div>
                         </div>
                       </td>
                     );
                   })}
                   {s ? (
                     <>
-                      <td
-                        className="px-2 py-2.5 text-center"
-                        style={{ background: heatColor((s.min - p.msrp) / p.msrp) }}
-                        title={`Prix min · ${eur(s.min)} · ${RETAILERS.find((r) => r.id === s.minRetailer)?.name} · écart ${(((s.min - p.msrp) / p.msrp) * 100).toFixed(1)}%`}
-                      >
-                        <div className="font-semibold text-slate-800">{eurShort(s.min)}</div>
-                        <div className="text-[10px] text-slate-500">{RETAILERS.find((r) => r.id === s.minRetailer)?.name}</div>
+                      <td className="border-l-2 border-slate-200 border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center">
+                        <div className="font-bold text-emerald-700">{eurShort(s.min)}</div>
+                        <div className="text-[10px] font-medium text-slate-500">{RETAILERS.find((r) => r.id === s.minRetailer)?.name}</div>
                       </td>
-                      <td
-                        className="px-2 py-2.5 text-center"
-                        style={{ background: heatColor((s.max - p.msrp) / p.msrp) }}
-                        title={`Prix max · ${eur(s.max)} · ${RETAILERS.find((r) => r.id === s.maxRetailer)?.name} · écart ${(((s.max - p.msrp) / p.msrp) * 100).toFixed(1)}%`}
-                      >
-                        <div className="font-semibold text-slate-800">{eurShort(s.max)}</div>
-                        <div className="text-[10px] text-slate-500">{RETAILERS.find((r) => r.id === s.maxRetailer)?.name}</div>
+                      <td className="border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center">
+                        <div className="font-bold text-rose-700">{eurShort(s.max)}</div>
+                        <div className="text-[10px] font-medium text-slate-500">{RETAILERS.find((r) => r.id === s.maxRetailer)?.name}</div>
                       </td>
-                      <td className="px-3 py-2.5 text-center font-semibold text-slate-700">{eurShort(s.avg)}</td>
-                      <td className="px-3 py-2.5 text-center">
+                      <td className="border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center font-semibold text-slate-700">{eurShort(s.avg)}</td>
+                      <td className="border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center">
                         <span
-                          className="font-semibold"
-                          style={{ color: s.avgGapPct <= -3 ? "#16a34a" : s.avgGapPct <= 0 ? "#65a30d" : "#dc2626" }}
+                          className={`inline-block rounded-full px-2 py-0.5 text-[11px] font-bold ${
+                            s.avgGapPct <= -3
+                              ? "bg-emerald-100 text-emerald-800"
+                              : s.avgGapPct <= 0
+                                ? "bg-lime-100 text-lime-800"
+                                : "bg-red-100 text-red-800"
+                          }`}
                         >
                           {s.avgGapPct > 0 ? "+" : ""}{s.avgGapPct.toFixed(1)}%
                         </span>
                       </td>
-                      <td className="px-3 py-2.5 text-center">
+                      <td className="border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center">
                         <span className="font-medium text-slate-600">{s.dispersion.toFixed(1)}%</span>
                       </td>
                     </>
                   ) : (
-                    <td colSpan={5} className="px-3 py-2.5 text-center text-[11px] text-slate-400">
-                      Aucune offre trackée — {p.msrp ? "référence non disponible chez les revendeurs suivis" : ""}
+                    <td colSpan={5} className="border-l-2 border-slate-200 border-b border-slate-100 px-3 py-2.5 text-center text-[11px] text-slate-400">
+                      Aucune offre trackée — référence non disponible chez les revendeurs suivis
                     </td>
                   )}
                 </tr>
@@ -496,9 +499,35 @@ function PriceMatrix({ onSelect }) {
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-slate-400">
-        n/r = non référencé · ▼/▲ = variation vs mois précédent · ⚑ = stock faible · survolez une cellule pour le détail.
-      </p>
+
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-[11px] text-slate-500 shadow-sm">
+        <span className="font-semibold text-slate-600">Écart MSRP :</span>
+        {[
+          { l: "≥ MSRP", c: heatColor(0.03) },
+          { l: "Au MSRP", c: heatColor(0) },
+          { l: "0 à -4%", c: heatColor(-0.03) },
+          { l: "-4 à -8%", c: heatColor(-0.06) },
+          { l: "< -8%", c: heatColor(-0.1) },
+        ].map((x) => (
+          <span key={x.l} className="flex items-center gap-1.5">
+            <span className="inline-block h-3.5 w-3.5 rounded-md ring-1 ring-black/10" style={{ background: x.c }} />
+            {x.l}
+          </span>
+        ))}
+        <span className="ml-2 h-4 w-px bg-slate-200" />
+        <span className="font-semibold text-slate-600">Fraîcheur :</span>
+        <span className="flex items-center gap-1"><span style={{ color: "#16a34a" }}>●</span> &lt; 2 j</span>
+        <span className="flex items-center gap-1"><span style={{ color: "#f59e0b" }}>●</span> &lt; 7 j</span>
+        <span className="flex items-center gap-1"><span style={{ color: "#dc2626" }}>●</span> périmé</span>
+        <span className="flex items-center gap-1"><span style={{ color: "#94a3b8" }}>●</span> non daté</span>
+        <span className="h-4 w-px bg-slate-200" />
+        <span className="flex items-center gap-1"><span className="inline-block h-3.5 w-3.5 rounded-md ring-2 ring-emerald-500 ring-offset-1" /> meilleur prix du marché</span>
+        <span>⚠ prix atypique</span>
+        <span>⛔ rupture</span>
+        <span>▼/▲ variation vs mois précédent</span>
+        <span>⚑ stock faible</span>
+        <span>n/r = non référencé · survolez une cellule pour le détail</span>
+      </div>
     </div>
   );
 }
@@ -739,7 +768,7 @@ export default function App() {
           <div>
             <h1 className="text-2xl font-bold text-slate-900">🔊 Veille tarifaire EVE Audio — état du marché</h1>
             <p className="text-sm text-slate-500">
-              {DATA_SOURCE} · {PRODUCTS.length} références × {RETAILERS.length} revendeurs (FR · DE · UK)
+              {DATA_SOURCE} · {PRODUCTS.length} références × {RETAILERS.length} revendeurs (FR · DE)
             </p>
           </div>
           {!selected && (
@@ -748,8 +777,8 @@ export default function App() {
                 <button
                   key={t.id}
                   onClick={() => setTab(t.id)}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-                    tab === t.id ? "bg-slate-900 text-white" : "bg-white text-slate-600 hover:bg-slate-200"
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    tab === t.id ? "bg-slate-900 text-white shadow" : "bg-white text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   {t.label}
