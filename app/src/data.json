@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T15:05:30.607Z",
+  "updatedAt": "2026-10-19T17:16:48.499Z",
   "msrp": {
     "EXO24": 479,
     "EXO25": 589,
@@ -86,7 +86,7 @@
       {
         "month": "2026-10",
         "price": 429,
-        "ts": "2026-10-19T14:38:55.807Z",
+        "ts": "2026-10-19T16:50:23.574Z",
         "confidence": "structured"
       }
     ],
@@ -94,7 +94,7 @@
       {
         "month": "2026-10",
         "price": 525,
-        "ts": "2026-10-19T14:39:02.193Z",
+        "ts": "2026-10-19T16:50:31.871Z",
         "confidence": "structured"
       }
     ],
@@ -102,7 +102,7 @@
       {
         "month": "2026-10",
         "price": 649,
-        "ts": "2026-10-19T14:39:08.754Z",
+        "ts": "2026-10-19T16:50:39.173Z",
         "confidence": "structured"
       }
     ],
@@ -110,7 +110,7 @@
       {
         "month": "2026-10",
         "price": 499,
-        "ts": "2026-10-19T14:39:28.034Z",
+        "ts": "2026-10-19T16:51:01.631Z",
         "confidence": "structured"
       }
     ],
@@ -118,7 +118,7 @@
       {
         "month": "2026-10",
         "price": 899,
-        "ts": "2026-10-19T14:39:35.600Z",
+        "ts": "2026-10-19T16:51:11.361Z",
         "confidence": "structured"
       }
     ],
@@ -126,7 +126,7 @@
       {
         "month": "2026-10",
         "price": 799,
-        "ts": "2026-10-19T14:42:41.071Z",
+        "ts": "2026-10-19T16:54:21.139Z",
         "confidence": "structured"
       }
     ],
@@ -134,7 +134,7 @@
       {
         "month": "2026-10",
         "price": 899,
-        "ts": "2026-10-19T14:42:48.606Z",
+        "ts": "2026-10-19T16:54:27.821Z",
         "confidence": "structured"
       }
     ],
@@ -142,7 +142,7 @@
       {
         "month": "2026-10",
         "price": 1349,
-        "ts": "2026-10-19T14:43:06.506Z",
+        "ts": "2026-10-19T16:54:46.106Z",
         "confidence": "structured"
       }
     ],
@@ -150,7 +150,7 @@
       {
         "month": "2026-10",
         "price": 1349,
-        "ts": "2026-10-19T14:43:13.500Z",
+        "ts": "2026-10-19T16:54:52.823Z",
         "confidence": "structured"
       }
     ],
@@ -158,7 +158,7 @@
       {
         "month": "2026-10",
         "price": 2099,
-        "ts": "2026-10-19T14:43:21.605Z",
+        "ts": "2026-10-19T16:54:59.773Z",
         "confidence": "structured"
       }
     ],
@@ -166,7 +166,7 @@
       {
         "month": "2026-10",
         "price": 539,
-        "ts": "2026-10-19T14:43:44.657Z",
+        "ts": "2026-10-19T16:55:23.675Z",
         "confidence": "structured"
       }
     ],
@@ -174,7 +174,7 @@
       {
         "month": "2026-10",
         "price": 789,
-        "ts": "2026-10-19T14:43:53.069Z",
+        "ts": "2026-10-19T16:55:30.691Z",
         "confidence": "structured"
       }
     ],
@@ -182,7 +182,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-19T14:44:04.196Z",
+        "ts": "2026-10-19T16:55:40.910Z",
         "confidence": "structured"
       }
     ],
@@ -190,7 +190,7 @@
       {
         "month": "2026-10",
         "price": 799,
-        "ts": "2026-10-19T14:45:15.153Z",
+        "ts": "2026-10-19T16:56:46.411Z",
         "confidence": "structured"
       }
     ],
@@ -198,7 +198,7 @@
       {
         "month": "2026-10",
         "price": 899,
-        "ts": "2026-10-19T14:45:26.105Z",
+        "ts": "2026-10-19T16:56:55.627Z",
         "confidence": "structured"
       }
     ],
@@ -206,7 +206,7 @@
       {
         "month": "2026-10",
         "price": 1349,
-        "ts": "2026-10-19T14:45:40.868Z",
+        "ts": "2026-10-19T16:57:14.492Z",
         "confidence": "structured"
       }
     ],
@@ -214,7 +214,7 @@
       {
         "month": "2026-10",
         "price": 1349,
-        "ts": "2026-10-19T14:45:52.009Z",
+        "ts": "2026-10-19T16:57:22.151Z",
         "confidence": "structured"
       }
     ],
@@ -222,7 +222,7 @@
       {
         "month": "2026-10",
         "price": 2099,
-        "ts": "2026-10-19T14:46:01.326Z",
+        "ts": "2026-10-19T16:57:32.289Z",
         "confidence": "structured"
       }
     ],
@@ -230,7 +230,7 @@
       {
         "month": "2026-10",
         "price": 539,
-        "ts": "2026-10-19T14:46:28.627Z",
+        "ts": "2026-10-19T16:57:59.400Z",
         "confidence": "structured"
       }
     ],
@@ -238,7 +238,7 @@
       {
         "month": "2026-10",
         "price": 789,
-        "ts": "2026-10-19T14:46:38.564Z",
+        "ts": "2026-10-19T16:58:06.226Z",
         "confidence": "structured"
       }
     ],
@@ -246,7 +246,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-19T14:46:47.046Z",
+        "ts": "2026-10-19T16:58:15.590Z",
         "confidence": "structured"
       }
     ],
@@ -254,7 +254,7 @@
       {
         "month": "2026-10",
         "price": 429,
-        "ts": "2026-10-19T14:53:28.767Z",
+        "ts": "2026-10-19T17:04:59.462Z",
         "confidence": "selector"
       }
     ],
@@ -262,7 +262,7 @@
       {
         "month": "2026-10",
         "price": 525,
-        "ts": "2026-10-19T14:53:41.579Z",
+        "ts": "2026-10-19T17:05:11.459Z",
         "confidence": "selector"
       }
     ],
@@ -270,7 +270,7 @@
       {
         "month": "2026-10",
         "price": 639,
-        "ts": "2026-10-19T14:53:54.615Z",
+        "ts": "2026-10-19T17:05:25.596Z",
         "confidence": "selector"
       }
     ],
@@ -278,7 +278,7 @@
       {
         "month": "2026-10",
         "price": 849,
-        "ts": "2026-10-19T14:54:07.528Z",
+        "ts": "2026-10-19T17:05:37.719Z",
         "confidence": "selector"
       }
     ],
@@ -286,7 +286,7 @@
       {
         "month": "2026-10",
         "price": 1360,
-        "ts": "2026-10-19T14:54:45.571Z",
+        "ts": "2026-10-19T17:06:11.156Z",
         "confidence": "selector"
       }
     ],
@@ -294,7 +294,7 @@
       {
         "month": "2026-10",
         "price": 1360,
-        "ts": "2026-10-19T14:55:12.292Z",
+        "ts": "2026-10-19T17:06:34.732Z",
         "confidence": "selector"
       }
     ],
@@ -302,7 +302,7 @@
       {
         "month": "2026-10",
         "price": 1360,
-        "ts": "2026-10-19T14:55:23.731Z",
+        "ts": "2026-10-19T17:06:44.445Z",
         "confidence": "selector"
       }
     ],
@@ -310,7 +310,7 @@
       {
         "month": "2026-10",
         "price": 539,
-        "ts": "2026-10-19T14:56:11.105Z",
+        "ts": "2026-10-19T17:07:26.399Z",
         "confidence": "structured"
       }
     ],
@@ -318,7 +318,7 @@
       {
         "month": "2026-10",
         "price": 796,
-        "ts": "2026-10-19T14:56:20.446Z",
+        "ts": "2026-10-19T17:07:36.891Z",
         "confidence": "structured"
       }
     ],
@@ -326,7 +326,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-19T14:56:28.304Z",
+        "ts": "2026-10-19T17:07:44.987Z",
         "confidence": "structured"
       }
     ],
@@ -334,7 +334,7 @@
       {
         "month": "2026-10",
         "price": 999,
-        "ts": "2026-10-19T14:56:42.561Z",
+        "ts": "2026-10-19T17:07:54.907Z",
         "confidence": "selector"
       }
     ],
@@ -342,7 +342,7 @@
       {
         "month": "2026-10",
         "price": 429,
-        "ts": "2026-10-19T14:56:54.742Z",
+        "ts": "2026-10-19T17:08:05.594Z",
         "confidence": "selector"
       }
     ],
@@ -350,7 +350,7 @@
       {
         "month": "2026-10",
         "price": 525,
-        "ts": "2026-10-19T14:57:08.409Z",
+        "ts": "2026-10-19T17:08:18.614Z",
         "confidence": "selector"
       }
     ],
@@ -358,8 +358,160 @@
       {
         "month": "2026-10",
         "price": 649,
-        "ts": "2026-10-19T14:57:19.959Z",
+        "ts": "2026-10-19T17:08:29.679Z",
         "confidence": "selector"
+      }
+    ],
+    "SC305|kmr": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-19T17:09:04.940Z",
+        "confidence": "selector"
+      }
+    ],
+    "SC305|musiker": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-19T17:12:04.341Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC307|musiker": [
+      {
+        "month": "2026-10",
+        "price": 1010.47,
+        "ts": "2026-10-19T17:12:12.909Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC2070|musiker": [
+      {
+        "month": "2026-10",
+        "price": 955,
+        "ts": "2026-10-19T17:12:23.625Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3010|musiker": [
+      {
+        "month": "2026-10",
+        "price": 4029,
+        "ts": "2026-10-19T17:13:08.164Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3012|musiker": [
+      {
+        "month": "2026-10",
+        "price": 5239,
+        "ts": "2026-10-19T17:13:16.083Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS107|musiker": [
+      {
+        "month": "2026-10",
+        "price": 726,
+        "ts": "2026-10-19T17:13:25.594Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS108|musiker": [
+      {
+        "month": "2026-10",
+        "price": 789,
+        "ts": "2026-10-19T17:13:36.082Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS110|musiker": [
+      {
+        "month": "2026-10",
+        "price": 1119,
+        "ts": "2026-10-19T17:13:44.427Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC305|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 799,
+        "ts": "2026-10-19T17:15:04.555Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC307|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-19T17:15:15.526Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC2070|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 888,
+        "ts": "2026-10-19T17:15:22.416Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC4070|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 2099,
+        "ts": "2026-10-19T17:15:56.280Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3010|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 3599,
+        "ts": "2026-10-19T17:16:04.838Z",
+        "confidence": "structured"
+      }
+    ],
+    "SC3012|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 4499,
+        "ts": "2026-10-19T17:16:13.622Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS107|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 539,
+        "ts": "2026-10-19T17:16:19.679Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS108|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 789,
+        "ts": "2026-10-19T17:16:28.102Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS110|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 999,
+        "ts": "2026-10-19T17:16:35.151Z",
+        "confidence": "structured"
+      }
+    ],
+    "TS112|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 1249,
+        "ts": "2026-10-19T17:16:42.322Z",
+        "confidence": "structured"
       }
     ],
     "EXO28|kmr": [
@@ -368,158 +520,6 @@
         "price": 849,
         "ts": "2026-10-19T14:57:32.018Z",
         "confidence": "selector"
-      }
-    ],
-    "SC305|kmr": [
-      {
-        "month": "2026-10",
-        "price": 799,
-        "ts": "2026-10-19T14:57:52.461Z",
-        "confidence": "selector"
-      }
-    ],
-    "SC305|musiker": [
-      {
-        "month": "2026-10",
-        "price": 799,
-        "ts": "2026-10-19T15:00:45.877Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC307|musiker": [
-      {
-        "month": "2026-10",
-        "price": 1010.47,
-        "ts": "2026-10-19T15:00:55.520Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC2070|musiker": [
-      {
-        "month": "2026-10",
-        "price": 955,
-        "ts": "2026-10-19T15:01:03.424Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3010|musiker": [
-      {
-        "month": "2026-10",
-        "price": 4029,
-        "ts": "2026-10-19T15:01:50.326Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3012|musiker": [
-      {
-        "month": "2026-10",
-        "price": 5239,
-        "ts": "2026-10-19T15:02:00.364Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS107|musiker": [
-      {
-        "month": "2026-10",
-        "price": 726,
-        "ts": "2026-10-19T15:02:10.451Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS108|musiker": [
-      {
-        "month": "2026-10",
-        "price": 789,
-        "ts": "2026-10-19T15:02:19.616Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS110|musiker": [
-      {
-        "month": "2026-10",
-        "price": 1119,
-        "ts": "2026-10-19T15:02:29.193Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC305|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 799,
-        "ts": "2026-10-19T15:03:42.881Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC307|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 999,
-        "ts": "2026-10-19T15:03:53.424Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC2070|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 888,
-        "ts": "2026-10-19T15:04:03.601Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC4070|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 2099,
-        "ts": "2026-10-19T15:04:34.630Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3010|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 3599,
-        "ts": "2026-10-19T15:04:42.863Z",
-        "confidence": "structured"
-      }
-    ],
-    "SC3012|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 4499,
-        "ts": "2026-10-19T15:04:50.593Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS107|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 539,
-        "ts": "2026-10-19T15:04:58.854Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS108|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 789,
-        "ts": "2026-10-19T15:05:08.874Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS110|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 999,
-        "ts": "2026-10-19T15:05:16.640Z",
-        "confidence": "structured"
-      }
-    ],
-    "TS112|vonbroenner": [
-      {
-        "month": "2026-10",
-        "price": 1249,
-        "ts": "2026-10-19T15:05:24.399Z",
-        "confidence": "structured"
       }
     ],
     "TS112|kmr": [
@@ -1065,6 +1065,30 @@
         "price": 4536.8,
         "ts": "2026-10-19T08:56:22.116Z",
         "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "EXO28|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 849,
+        "ts": "2026-10-19T16:30:00.000Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC203SET|vonbroenner": [
+      {
+        "month": "2026-10",
+        "price": 549,
+        "ts": "2026-10-19T16:30:00.000Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC203SET|musikproductive": [
+      {
+        "month": "2026-10",
+        "price": 499,
+        "ts": "2026-10-19T16:30:00.000Z",
         "confidence": "manual"
       }
     ]
