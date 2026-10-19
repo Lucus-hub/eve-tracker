@@ -551,7 +551,9 @@
     "EXO28|thomann": [
       {
         "month": "2026-10",
-        "price": 799
+        "price": 849,
+        "ts": "2026-10-19T15:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC305|thomann": [
@@ -841,7 +843,9 @@
     "EXO28|musikstore": [
       {
         "month": "2026-10",
-        "price": 755.5
+        "price": 849,
+        "ts": "2026-10-19T15:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "EXO24|gear4music": [
