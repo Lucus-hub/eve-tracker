@@ -18,20 +18,18 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Fix EXO28 prices (thomann and musikstore, 849 EUR, manual dated)
+      - name: Patch App.jsx v20 (remove green outline, shorten title, clean legend)
         run: |
-          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('data/history.json','utf8'));const ts='2026-10-19T15:00:00.000Z';d.history['EXO28|thomann']=[{month:'2026-10',price:849,ts:ts,confidence:'manual'}];d.history['EXO28|musikstore']=[{month:'2026-10',price:849,ts:ts,confidence:'manual'}];fs.writeFileSync('data/history.json',JSON.stringify(d,null,2)+String.fromCharCode(10))"
+          node -e 'const fs=require("fs");let c=fs.readFileSync("app/src/App.jsx","utf8");const t1="Veille tarifaire EVE Audio \u2014 \u00e9tat du march\u00e9";if(!c.includes(t1))throw new Error("v20 title introuvable");c=c.replace(t1,"Veille tarifaire EVE Audio");const t2="isBest ? \"outline outline-2 -outline-offset-2 outline-emerald-500\" : \"\"";if(!c.includes(t2))throw new Error("v20 outline introuvable");c=c.replace(t2,"\"\"");const t3="<span className=\"flex items-center gap-1\"><span className=\"inline-block h-3.5 w-3.5 rounded-md ring-2 ring-emerald-500 ring-offset-1\" /> meilleur prix du march\u00e9</span>";if(!c.includes(t3))throw new Error("v20 legende introuvable");c=c.replace(t3,"");fs.writeFileSync("app/src/App.jsx",c);console.log("App.jsx patche v20")'
 
-      - name: Restore Tailwind CSS in app/index.html (v19)
+      - name: Add missing EXO28 and SC203 prices (vonbroenner, musikproductive, manual dated)
         run: |
-          B=""
-          B+="PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImZyIj4KICA8aGVhZD4KICAgIDxtZXRhIGNoYXJzZXQ9IlVURi04IiAvPgogICAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiIC8+CiAgICA8dGl0bGU+VmVpbGxlIHRhcmlmYWlyZSBFVkUgQXVkaW88L3RpdGxlPgogICAgPHNjcmlwdCBzcmM9Imh0dHBzOi8vY2RuLnRhaWx3aW5kY3NzLmNvbSI+PC9zY3JpcHQ+CiAgPC9oZWFkPgogIDxib2R5PgogICAgPGRpdiBpZD0icm9vdCI+PC9kaXY+CiAgICA8c2NyaXB0IHR5cGU9Im1vZHVsZSIgc3JjPSIvc3JjL21haW4uanN4Ij48L3NjcmlwdD4KICA8L2JvZHk+CjwvaHRtbD4K"
-          printf %s "$B" | base64 -d > app/index.html
+          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));const ts="2026-10-19T16:30:00.000Z";const mk=(p)=>[{month:"2026-10",price:p,ts:ts,confidence:"manual"}];d.history["EXO28|vonbroenner"]=mk(849);d.history["SC203SET|vonbroenner"]=mk(549);d.history["SC203SET|musikproductive"]=mk(499);fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
 
-      - name: Commit v19
+      - name: Commit v20
         run: |
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
-          git add data/history.json app/index.html
-          git commit -m "fix v19: EXO28 prices 849 EUR (thomann, musikstore) + restore Tailwind CSS"
+          git add app/src/App.jsx data/history.json
+          git commit -m "v20: no green outline, shorter title, add EXO28/SC203 vonbroenner + SC203 musikproductive"
           git push
