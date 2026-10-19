@@ -1035,6 +1035,40 @@
         "ts": "2026-10-19T08:03:45.979Z",
         "confidence": "manual"
       }
+    ],
+    "EXO24|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 429,
+        "ts": "2026-10-19T08:56:22.116Z",
+        "confidence": "manual"
+      }
+    ],
+    "EXO27|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 649,
+        "ts": "2026-10-19T08:56:22.116Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC203SET|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 499,
+        "ts": "2026-10-19T08:56:22.116Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
+    ],
+    "SC3012|musikstore": [
+      {
+        "month": "2026-10",
+        "price": 4536.8,
+        "ts": "2026-10-19T08:56:22.116Z",
+        "stock": "out",
+        "confidence": "manual"
+      }
     ]
   }
 }
