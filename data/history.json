@@ -630,14 +630,16 @@
       {
         "month": "2026-10",
         "price": 849,
-        "ts": "2026-10-14T13:30:44.020Z",
-        "confidence": "structured"
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC307|michenaud": [
       {
         "month": "2026-10",
-        "price": 1049
+        "price": 1049,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC203SET|sonovente": [
@@ -649,68 +651,89 @@
     "EXO24|stars": [
       {
         "month": "2026-10",
-        "price": 439
+        "price": 439,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "EXO25|stars": [
       {
         "month": "2026-10",
-        "price": 559
+        "price": 559,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "EXO27|stars": [
       {
         "month": "2026-10",
-        "price": 640
+        "price": 640,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "EXO28|stars": [
       {
         "month": "2026-10",
-        "price": 823
+        "price": 849,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC305|stars": [
       {
         "month": "2026-10",
-        "price": 888
+        "price": 888,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC2070|stars": [
       {
         "month": "2026-10",
-        "price": 899
+        "price": 899,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC203SET|stars": [
       {
         "month": "2026-10",
-        "price": 499
+        "price": 499,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC3010|stars": [
       {
         "month": "2026-10",
-        "price": 3999
+        "price": 3999,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "SC3012|stars": [
       {
         "month": "2026-10",
         "price": 5199,
-        "stock": "out"
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "TS110|stars": [
       {
         "month": "2026-10",
-        "price": 1006
+        "price": 1006,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "TS112|stars": [
       {
         "month": "2026-10",
-        "price": 1280
+        "price": 1280,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
       }
     ],
     "EXO24|vonbroenner": [
@@ -898,6 +921,118 @@
         "month": "2026-10",
         "price": 499,
         "ts": "2026-10-15T09:10:50.388Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070L|stars": [
+      {
+        "month": "2026-10",
+        "price": 1554,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070R|stars": [
+      {
+        "month": "2026-10",
+        "price": 1699,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC4070|stars": [
+      {
+        "month": "2026-10",
+        "price": 2195,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS107|stars": [
+      {
+        "month": "2026-10",
+        "price": 576,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS108|stars": [
+      {
+        "month": "2026-10",
+        "price": 789,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC2070|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 949,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070L|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 1699,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC3070R|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 1699,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC4070|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 2399,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC3010|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 3999,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "SC3012|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 5199,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS107|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 629,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS108|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 849,
+        "ts": "2026-10-19T08:03:45.979Z",
+        "confidence": "manual"
+      }
+    ],
+    "TS110|michenaud": [
+      {
+        "month": "2026-10",
+        "price": 1099,
+        "ts": "2026-10-19T08:03:45.979Z",
         "confidence": "manual"
       }
     ]

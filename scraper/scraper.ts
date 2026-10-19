@@ -43,7 +43,7 @@ import path from "path";
 // domaine est interdit â en particulier Audiofanzine et les comparateurs
 // (Equipboard, Reverb, Geizhals, Idealo, leDÃ©nicheurâ¦).
 const ALLOWED_DOMAINS = [
-  "stars-music.com", "michenaud.com", "sonovente.com", "univers-sons.com",
+  "stars-music.com", "stars-music.fr", "michenaud.com", "sonovente.com", "univers-sons.com",
   "thomann.fr", "musicstore.com", "musik-produktiv.fr",
   "kmraudio.com", "kmraudio.de", "muziker.fr", "muziker.com", "muziker.de",
   "vonbroenner.de", "gear4music.com", "gear4music.fr",
@@ -211,6 +211,8 @@ const retailers: Retailer[] = [
 const michenaudIds: Record<string, number> = {
   "EXO24": 61017, "EXO25": 61018, "EXO27": 61019, "EXO28": 61028,
   "SC305": 61027, "SC307": 61026, "SC203SET": 61021,
+  "SC4070": 38209, "SC3012": 38212, "SC3070R": 61343,
+  // v12 : 3 fiches verifiees le 19/10/2026 (catalogue michenaud.com) ;
   // Ã  complÃ©ter au fil des dÃ©couvertes ; absent â productUrl retourne une URL
   // avec id 0 â 404 gÃ©rÃ©e proprement, fallback searchUrl
 };
