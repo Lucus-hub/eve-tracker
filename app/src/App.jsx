@@ -415,15 +415,15 @@ function PriceMatrix({ onSelect }) {
                       return (
                         <td key={r.id} className="border-b border-slate-100 px-1.5 py-2 text-center">
                           <div
-                            className="mx-auto w-fit min-w-[64px] rounded-lg px-2.5 py-1.5 opacity-60"
+                            className="mx-auto flex w-fit min-w-[86px] items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 opacity-60"
                             style={priceChip(gapPct)}
                             title={`${r.name} · ${eur(h.current)} · RUPTURE chez le revendeur · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}`}
                           >
-                            <div className="font-semibold text-slate-500 line-through">{eurShort(h.current)}</div>
-                            <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500">
+                            <span className="font-bold text-slate-500 line-through">{eurShort(h.current)}</span>
+                            <span className="flex items-center gap-1 text-[10px] text-slate-500">
                               <span>⛔</span>
                               <span style={{ color: fr.color }}>{fr.char}</span>
-                            </div>
+                            </span>
                           </div>
                         </td>
                       );
@@ -433,19 +433,19 @@ function PriceMatrix({ onSelect }) {
                     return (
                       <td key={r.id} className="border-b border-slate-100 px-1.5 py-2 text-center">
                         <div
-                          className={`mx-auto w-fit min-w-[64px] rounded-lg px-2.5 py-1.5 transition-transform duration-150 hover:scale-[1.05] ${
+                          className={`mx-auto flex w-fit min-w-[86px] items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 transition-transform duration-150 hover:scale-[1.05] ${
                             isBest ? "ring-2 ring-emerald-500 ring-offset-1" : ""
                           }`}
                           style={priceChip(gapPct)}
                           title={`${r.name} · ${eur(h.current)} · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · var. 1 mois ${trend > 0 ? "+" : ""}${trend} €${h.stock === "low" ? " · stock faible" : ""} · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}${suspicious ? " · ⚠ prix atypique vs marché (à vérifier)" : ""}${isBest ? " · MEILLEUR PRIX du marché" : ""}`}
                         >
-                          <div className="font-semibold leading-tight">
+                          <span className="font-bold leading-tight">
                             {eurShort(h.current)}
-                            {suspicious && <span className="ml-1">⚠</span>}
-                          </div>
-                          <div className="flex items-center justify-center gap-1.5 text-[10px] leading-none">
+                            {suspicious && <span className="ml-0.5">⚠</span>}
+                          </span>
+                          <span className="flex items-center gap-1 text-[10px] font-semibold leading-none">
                             <span style={{ color: fr.color }}>{fr.char}</span>
-                            <span className="font-semibold opacity-80">
+                            <span className="opacity-80">
                               {gapPct > 0 ? "+" : ""}{(gapPct * 100).toFixed(0)}%
                             </span>
                             {trend !== 0 && (
@@ -454,7 +454,7 @@ function PriceMatrix({ onSelect }) {
                               </span>
                             )}
                             {h.stock === "low" && <span>⚑</span>}
-                          </div>
+                          </span>
                         </div>
                       </td>
                     );
