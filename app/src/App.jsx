@@ -309,14 +309,6 @@ function PriceMatrix({ onSelect }) {
     [family, sortBy]
   );
 
-  // pastille de prix : fond heat + bordure douce, texte contrasté
-  const priceChip = (gapPct, extra = "") => ({
-    background: heatColor(gapPct),
-    color: heatText(gapPct),
-    border: "1px solid rgba(15,23,42,0.08)",
-    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.35)",
-  });
-
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm">
@@ -413,17 +405,16 @@ function PriceMatrix({ onSelect }) {
                     if (h.stock === "out") {
                       // Rupture : le prix reste une info de marché → affiché grisé, marqué ⛔
                       return (
-                        <td key={r.id} className="border-b border-slate-100 px-1.5 py-2 text-center">
-                          <div
-                            className="mx-auto w-fit min-w-[64px] rounded-lg px-2.5 py-1.5 opacity-60"
-                            style={priceChip(gapPct)}
-                            title={`${r.name} · ${eur(h.current)} · RUPTURE chez le revendeur · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}`}
-                          >
-                            <div className="text-[15px] font-bold leading-tight text-slate-500 line-through">{eurShort(h.current)}</div>
-                            <div className="flex items-center justify-start gap-1 text-[10px] leading-none text-slate-500">
-                              <span>⛔</span>
-                              <span style={{ color: fr.color }}>{fr.char}</span>
-                            </div>
+                        <td
+                          key={r.id}
+                          className="border-b border-slate-100 px-2 py-2.5"
+                          style={{ background: heatColor(gapPct), opacity: 0.55 }}
+                          title={`${r.name} · ${eur(h.current)} · RUPTURE chez le revendeur · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}`}
+                        >
+                          <div className="text-left text-[15px] font-bold leading-tight text-slate-500 line-through">{eurShort(h.current)}</div>
+                          <div className="flex items-center justify-end gap-1 text-[10px] leading-none text-slate-500">
+                            <span>⛔</span>
+                            <span style={{ color: fr.color }}>{fr.char}</span>
                           </div>
                         </td>
                       );
@@ -431,30 +422,29 @@ function PriceMatrix({ onSelect }) {
                     const trend = h.delta1m;
                     const suspicious = isSuspicious(p.id, h.current);
                     return (
-                      <td key={r.id} className="border-b border-slate-100 px-1.5 py-2 text-center">
-                        <div
-                          className={`mx-auto w-fit min-w-[64px] rounded-lg px-2.5 py-1.5 transition-transform duration-150 hover:scale-[1.05] ${
-                            isBest ? "ring-2 ring-emerald-500 ring-offset-1" : ""
-                          }`}
-                          style={priceChip(gapPct)}
-                          title={`${r.name} · ${eur(h.current)} · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · var. 1 mois ${trend > 0 ? "+" : ""}${trend} €${h.stock === "low" ? " · stock faible" : ""} · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}${suspicious ? " · ⚠ prix atypique vs marché (à vérifier)" : ""}${isBest ? " · MEILLEUR PRIX du marché" : ""}`}
-                        >
-                          <div className="text-[15px] font-bold leading-tight">
-                            {eurShort(h.current)}
-                            {suspicious && <span className="ml-0.5">⚠</span>}
-                          </div>
-                          <div className="flex items-center justify-start gap-1 text-[10px] leading-none">
-                            <span style={{ color: fr.color }}>{fr.char}</span>
-                            <span className="font-semibold opacity-80">
-                              {gapPct > 0 ? "+" : ""}{(gapPct * 100).toFixed(0)}%
+                      <td
+                        key={r.id}
+                        className={`border-b border-slate-100 px-2 py-2.5 ${
+                          isBest ? "outline outline-2 -outline-offset-2 outline-emerald-500" : ""
+                        }`}
+                        style={{ background: heatColor(gapPct), color: heatText(gapPct) }}
+                        title={`${r.name} · ${eur(h.current)} · écart ${gapPct > 0 ? "+" : ""}${(gapPct * 100).toFixed(1)}% · var. 1 mois ${trend > 0 ? "+" : ""}${trend} €${h.stock === "low" ? " · stock faible" : ""} · ${fr.label} · ${CONFIDENCE_LABEL[h.confidence] ?? CONFIDENCE_LABEL.manual}${suspicious ? " · ⚠ prix atypique vs marché (à vérifier)" : ""}${isBest ? " · MEILLEUR PRIX du marché" : ""}`}
+                      >
+                        <div className="text-left text-[15px] font-bold leading-tight">
+                          {eurShort(h.current)}
+                          {suspicious && <span className="ml-0.5">⚠</span>}
+                        </div>
+                        <div className="flex items-center justify-end gap-1 text-[10px] leading-none">
+                          <span style={{ color: fr.color }}>{fr.char}</span>
+                          <span className="font-semibold opacity-80">
+                            {gapPct > 0 ? "+" : ""}{(gapPct * 100).toFixed(0)}%
+                          </span>
+                          {trend !== 0 && (
+                            <span className="font-bold" style={{ color: trend < 0 ? "#047857" : "#b91c1c" }}>
+                              {trend < 0 ? "▼" : "▲"}
                             </span>
-                            {trend !== 0 && (
-                              <span className="font-bold" style={{ color: trend < 0 ? "#047857" : "#b91c1c" }}>
-                                {trend < 0 ? "▼" : "▲"}
-                              </span>
-                            )}
-                            {h.stock === "low" && <span>⚑</span>}
-                          </div>
+                          )}
+                          {h.stock === "low" && <span>⚑</span>}
                         </div>
                       </td>
                     );
