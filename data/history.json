@@ -771,43 +771,57 @@
     "SC305|musikstore": [
       {
         "month": "2026-10",
-        "price": 899
+        "price": 799,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC307|musikstore": [
       {
         "month": "2026-10",
-        "price": 805
+        "price": 979,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC2070|musikstore": [
       {
         "month": "2026-10",
-        "price": 899
+        "price": 888,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC3070L|musikstore": [
       {
         "month": "2026-10",
-        "price": 1499
+        "price": 1489,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC3070R|musikstore": [
       {
         "month": "2026-10",
-        "price": 1499
+        "price": 1489,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC4070|musikstore": [
       {
         "month": "2026-10",
-        "price": 2016
+        "price": 2099,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "SC3010|musikstore": [
       {
         "month": "2026-10",
-        "price": 3730.1
+        "price": 3629.2,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "TS107|musikstore": [
@@ -837,7 +851,9 @@
     "EXO25|musikstore": [
       {
         "month": "2026-10",
-        "price": 486.6
+        "price": 525,
+        "ts": "2026-10-20T10:00:00.000Z",
+        "confidence": "manual"
       }
     ],
     "EXO28|musikstore": [
@@ -1063,8 +1079,7 @@
       {
         "month": "2026-10",
         "price": 4536.8,
-        "ts": "2026-10-19T08:56:22.116Z",
-        "stock": "out",
+        "ts": "2026-10-20T10:00:00.000Z",
         "confidence": "manual"
       }
     ],
