@@ -18,18 +18,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Patch App.jsx v20 (remove green outline, shorten title, clean legend)
+      - name: Fix Music Store prices (v21, manual dated)
         run: |
-          node -e 'const fs=require("fs");let c=fs.readFileSync("app/src/App.jsx","utf8");const t1="Veille tarifaire EVE Audio \u2014 \u00e9tat du march\u00e9";if(!c.includes(t1))throw new Error("v20 title introuvable");c=c.replace(t1,"Veille tarifaire EVE Audio");const t2="isBest ? \"outline outline-2 -outline-offset-2 outline-emerald-500\" : \"\"";if(!c.includes(t2))throw new Error("v20 outline introuvable");c=c.replace(t2,"\"\"");const t3="<span className=\"flex items-center gap-1\"><span className=\"inline-block h-3.5 w-3.5 rounded-md ring-2 ring-emerald-500 ring-offset-1\" /> meilleur prix du march\u00e9</span>";if(!c.includes(t3))throw new Error("v20 legende introuvable");c=c.replace(t3,"");fs.writeFileSync("app/src/App.jsx",c);console.log("App.jsx patche v20")'
+          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));const ts="2026-10-20T10:00:00.000Z";const mk=(p)=>[{month:"2026-10",price:p,ts:ts,confidence:"manual"}];const H=d.history;H["EXO25|musikstore"]=mk(525);H["SC3010|musikstore"]=mk(3629.2);H["SC3012|musikstore"]=mk(4536.8);H["SC3070R|musikstore"]=mk(1489);H["SC3070L|musikstore"]=mk(1489);H["SC305|musikstore"]=mk(799);H["SC307|musikstore"]=mk(979);H["SC2070|musikstore"]=mk(888);H["SC4070|musikstore"]=mk(2099);fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
 
-      - name: Add missing EXO28 and SC203 prices (vonbroenner, musikproductive, manual dated)
-        run: |
-          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));const ts="2026-10-19T16:30:00.000Z";const mk=(p)=>[{month:"2026-10",price:p,ts:ts,confidence:"manual"}];d.history["EXO28|vonbroenner"]=mk(849);d.history["SC203SET|vonbroenner"]=mk(549);d.history["SC203SET|musikproductive"]=mk(499);fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
-
-      - name: Commit v20
+      - name: Commit v21
         run: |
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
-          git add app/src/App.jsx data/history.json
-          git commit -m "v20: no green outline, shorter title, add EXO28/SC203 vonbroenner + SC203 musikproductive"
+          git add data/history.json
+          git commit -m "fix v21: correct Music Store prices (EXO25, SC301x, SC307x, SC205-4070)"
           git push
