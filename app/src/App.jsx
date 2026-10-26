@@ -358,8 +358,8 @@ function PriceMatrix({ onSelect }) {
                   <div className="text-[10px] normal-case tracking-normal text-slate-400">{r.site}</div>
                 </th>
               ))}
-              <th className="border-l-2 border-white/20 bg-slate-950/60 px-3 py-3.5 text-center font-semibold text-emerald-300">Prix min</th>
-              <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold text-rose-300">Prix max</th>
+              <th className="border-l-2 border-white/20 bg-slate-950/60 px-3 py-3.5 text-center font-semibold text-red-300">Prix min</th>
+              <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold text-emerald-300">Prix max</th>
               <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold">Moy. marché</th>
               <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold">Écart moy.</th>
               <th className="bg-slate-950/60 px-3 py-3.5 text-center font-semibold">Dispersion</th>
@@ -452,11 +452,11 @@ function PriceMatrix({ onSelect }) {
                   {s ? (
                     <>
                       <td className="border-l-2 border-slate-200 border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center">
-                        <div className="font-bold text-emerald-700">{eurShort(s.min)}</div>
+                        <div className="font-bold text-red-700">{eurShort(s.min)}</div>
                         <div className="text-[10px] font-medium text-slate-500">{RETAILERS.find((r) => r.id === s.minRetailer)?.name}</div>
                       </td>
                       <td className="border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center">
-                        <div className="font-bold text-rose-700">{eurShort(s.max)}</div>
+                        <div className="font-bold text-emerald-700">{eurShort(s.max)}</div>
                         <div className="text-[10px] font-medium text-slate-500">{RETAILERS.find((r) => r.id === s.maxRetailer)?.name}</div>
                       </td>
                       <td className="border-b border-slate-100 bg-slate-50/70 px-3 py-2.5 text-center font-semibold text-slate-700">{eurShort(s.avg)}</td>
@@ -464,10 +464,10 @@ function PriceMatrix({ onSelect }) {
                         <span
                           className={`inline-block rounded-full px-2 py-0.5 text-[11px] font-bold ${
                             s.avgGapPct <= -3
-                              ? "bg-emerald-100 text-emerald-800"
+                              ? "bg-red-100 text-red-800"
                               : s.avgGapPct <= 0
-                                ? "bg-lime-100 text-lime-800"
-                                : "bg-red-100 text-red-800"
+                                ? "bg-orange-100 text-orange-800"
+                                : "bg-emerald-100 text-emerald-800"
                           }`}
                         >
                           {s.avgGapPct > 0 ? "+" : ""}{s.avgGapPct.toFixed(1)}%
