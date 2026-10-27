@@ -18,14 +18,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Patch App.jsx v23 (summary columns colors aligned with heat map)
+      - name: Fix SC3070L Music Store price (v24, manual dated)
         run: |
-          node -e 'const fs=require("fs");let c=fs.readFileSync("app/src/App.jsx","utf8");const rep=(f,t)=>{if(!c.includes(f))throw new Error("v23 introuvable: "+f.slice(0,40));c=c.split(f).join(t)};rep("text-emerald-300\">Prix min","text-red-300\">Prix min");rep("text-rose-300\">Prix max","text-emerald-300\">Prix max");rep("text-emerald-700\">{eurShort(s.min)}","text-red-700\">{eurShort(s.min)}");rep("text-rose-700\">{eurShort(s.max)}","text-emerald-700\">{eurShort(s.max)}");rep("bg-emerald-100 text-emerald-800","__TMP__");rep("bg-red-100 text-red-800","bg-emerald-100 text-emerald-800");rep("__TMP__","bg-red-100 text-red-800");rep("bg-lime-100 text-lime-800","bg-orange-100 text-orange-800");fs.writeFileSync("app/src/App.jsx",c);console.log("App.jsx patche v23")'
+          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));d.history["SC3070L|musikstore"]=[{month:"2026-10",price:1349,ts:"2026-10-20T18:00:00.000Z",confidence:"manual"}];fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
 
-      - name: Commit v23
+      - name: Commit v24
         run: |
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
-          git add app/src/App.jsx
-          git commit -m "v23: summary columns colors aligned with heat map (min red, max green, gap pill inverted)"
+          git add data/history.json
+          git commit -m "fix v24: SC3070L Music Store 1349 EUR"
           git push
