@@ -18,14 +18,22 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Fix SC3070L Music Store price (v24, manual dated)
+      - name: Patch App.jsx v25 (global data freshness banner)
         run: |
-          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));d.history["SC3070L|musikstore"]=[{month:"2026-10",price:1349,ts:"2026-10-20T18:00:00.000Z",confidence:"manual"}];fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
+          B=""
+          B+="Y29uc3QgZnMgPSByZXF1aXJlKCJmcyIpOwpsZXQgYyA9IGZzLnJlYWRGaWxlU3luYygiYXBwL3NyYy9BcHAuanN4IiwgInV0ZjgiKTsKCmNvbnN0IGFuY2hvcjEgPSAnZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gQXBwKCkge1xuICBjb25zdCBbdGFiLCBzZXRUYWJdID0gdXNlU3RhdGUoIm1hdHJpeCIpOyc7CmNvbnN0IGFkZDEgPSAnZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gQXBwKCkge1xuICBjb25zdCBbdGFiLCBzZXRUYWJdID0gdXNlU3RhdGUoIm1hdHJpeCIpO1xuXG4gIC8vIHYyNSA6IGFnZSBkdSBkZXJuaWVyIHJ1biBkZSBjb2xsZWN0ZSAoYmFuZGVhdSBnbG9iYWwgZGUgZnJhaWNoZXVyKVxuICBjb25zdCBkYXRhQWdlRGF5cyA9IEVYVEVSTkFMX0RB"
+          B+="VEFcbiAgICA/IE1hdGgubWF4KDAsIE1hdGguZmxvb3IoKERhdGUubm93KCkgLSBuZXcgRGF0ZShFWFRFUk5BTF9EQVRBLnVwZGF0ZWRBdCkuZ2V0VGltZSgpKSAvIDg2NDAwMDAwKSlcbiAgICA6IG51bGw7JzsKaWYgKCFjLmluY2x1ZGVzKGFuY2hvcjEpKSB0aHJvdyBuZXcgRXJyb3IoInYyNTogYW5jcmUgMSBpbnRyb3V2YWJsZSIpOwpjID0gYy5zcGxpdChhbmNob3IxKS5qb2luKGFkZDEpOwoKY29uc3QgYmFubmVyID0gWwogICcgICAgICAgIHtkYXRhQWdlRGF5cyAhPT0gbnVsbCAmJiAoJywKICAnICAgICAgICAgIDxkaXYnLAogICcgICAgICAgICAgICBjbGFzc05hbWU9e2BmbGV4IGZsZXgtd3JhcCBpdGVtcy1jZW50ZXIgZ2FwLTIgcm91bmRlZC14bCBi"
+          B+="b3JkZXIgcHgtNCBweS0yIHRleHQtc20gZm9udC1zZW1pYm9sZCAkeycsCiAgJyAgICAgICAgICAgICAgZGF0YUFnZURheXMgPj0gNCcsCiAgJyAgICAgICAgICAgICAgICA/ICJib3JkZXItcmVkLTIwMCBiZy1yZWQtNTAgdGV4dC1yZWQtNzAwIicsCiAgJyAgICAgICAgICAgICAgICA6IGRhdGFBZ2VEYXlzID49IDInLAogICcgICAgICAgICAgICAgICAgICA/ICJib3JkZXItYW1iZXItMjAwIGJnLWFtYmVyLTUwIHRleHQtYW1iZXItNzAwIicsCiAgJyAgICAgICAgICAgICAgICAgIDogImJvcmRlci1lbWVyYWxkLTIwMCBiZy1lbWVyYWxkLTUwIHRleHQtZW1lcmFsZC03MDAiJywKICAnICAgICAgICAgICAgfWB9JywKICAnICAgICAgICAgID4nLAogICcgICAg"
+          B+="ICAgICAgICA8c3Bhbj57ZGF0YUFnZURheXMgPj0gNCA/ICLwn5S0IiA6IGRhdGFBZ2VEYXlzID49IDIgPyAi8J+foCIgOiAi8J+foiJ9PC9zcGFuPicsCiAgJyAgICAgICAgICAgIDxzcGFuPicsCiAgJyAgICAgICAgICAgICAgeyJEZXJuacOocmUgY29sbGVjdGUgOiAifScsCiAgJyAgICAgICAgICAgICAge2RhdGFBZ2VEYXlzID09PSAwJywKICAnICAgICAgICAgICAgICAgID8gImF1am91cmRcJ2h1aSDigJQgZG9ubsOpZXMgZnJhw65jaGVzIicsCiAgJyAgICAgICAgICAgICAgICA6IGRhdGFBZ2VEYXlzID09PSAxJywKICAnICAgICAgICAgICAgICAgICAgPyAiaGllciDigJQgZG9ubsOpZXMgZnJhw65jaGVzIicsCiAgJyAgICAgICAgICAgICAgICAgIDog"
+          B+="ZGF0YUFnZURheXMgPD0gMycsCiAgJyAgICAgICAgICAgICAgICAgICAgPyBgaWwgeSBhICR7ZGF0YUFnZURheXN9IGpvdXJzYCcsCiAgJyAgICAgICAgICAgICAgICAgICAgOiBgaWwgeSBhICR7ZGF0YUFnZURheXN9IGpvdXJzIOKAlCBkb25uw6llcyBww6lyaW3DqWVzIDogcmVsYW5jZXIgbGUgd29ya2Zsb3cgU2NyYXBlICYgRGVwbG95YH0nLAogICcgICAgICAgICAgICA8L3NwYW4+JywKICAnICAgICAgICAgIDwvZGl2PicsCiAgJyAgICAgICAgKX0nLApdLmpvaW4oIlxuIik7Cgpjb25zdCBhbmNob3IyID0gIiAgICAgICAgPC9oZWFkZXI+XG5cbiAgICAgICAge3NlbGVjdGVkID8gKCI7CmNvbnN0IGFkZDIgPSAiICAgICAgICA8L2hlYWRlcj5cblxuIiAr"
+          B+="IGJhbm5lciArICJcblxuICAgICAgICB7c2VsZWN0ZWQgPyAoIjsKaWYgKCFjLmluY2x1ZGVzKGFuY2hvcjIpKSB0aHJvdyBuZXcgRXJyb3IoInYyNTogYW5jcmUgMiBpbnRyb3V2YWJsZSIpOwpjID0gYy5zcGxpdChhbmNob3IyKS5qb2luKGFkZDIpOwoKZnMud3JpdGVGaWxlU3luYygiYXBwL3NyYy9BcHAuanN4IiwgYyk7CmNvbnNvbGUubG9nKCJBcHAuanN4IHBhdGNoZSB2MjUiKTsK"
+          printf %s "$B" | base64 -d > /tmp/patch-v25.cjs
+          node /tmp/patch-v25.cjs
 
-      - name: Commit v24
+      - name: Commit v25
         run: |
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
-          git add data/history.json
-          git commit -m "fix v24: SC3070L Music Store 1349 EUR"
+          git add app/src/App.jsx
+          git commit -m "v25: global data freshness banner (last collection age)"
           git push
