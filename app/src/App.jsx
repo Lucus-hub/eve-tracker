@@ -744,6 +744,11 @@ function RetailerView() {
 // ------------------------------------------------------------------
 export default function App() {
   const [tab, setTab] = useState("matrix");
+
+  // v25 : age du dernier run de collecte (bandeau global de fraicheur)
+  const dataAgeDays = EXTERNAL_DATA
+    ? Math.max(0, Math.floor((Date.now() - new Date(EXTERNAL_DATA.updatedAt).getTime()) / 86400000))
+    : null;
   const [selected, setSelected] = useState(null);
 
   const tabs = [
@@ -777,6 +782,30 @@ export default function App() {
             </div>
           )}
         </header>
+
+        {dataAgeDays !== null && (
+          <div
+            className={`flex flex-wrap items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold ${
+              dataAgeDays >= 4
+                ? "border-red-200 bg-red-50 text-red-700"
+                : dataAgeDays >= 2
+                  ? "border-amber-200 bg-amber-50 text-amber-700"
+                  : "border-emerald-200 bg-emerald-50 text-emerald-700"
+            }`}
+          >
+            <span>{dataAgeDays >= 4 ? "🔴" : dataAgeDays >= 2 ? "🟠" : "🟢"}</span>
+            <span>
+              {"Dernière collecte : "}
+              {dataAgeDays === 0
+                ? "aujourd'hui — données fraîches"
+                : dataAgeDays === 1
+                  ? "hier — données fraîches"
+                  : dataAgeDays <= 3
+                    ? `il y a ${dataAgeDays} jours`
+                    : `il y a ${dataAgeDays} jours — données périmées : relancer le workflow Scrape & Deploy`}
+            </span>
+          </div>
+        )}
 
         {selected ? (
           <ProductDetail pid={selected} onBack={() => setSelected(null)} />
