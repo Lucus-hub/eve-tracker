@@ -18,14 +18,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Fix Thomann SC305 and SC307 prices (v26, manual dated)
+      - name: Fix Von Broenner EXO27 price 649 -> 639 (v27, manual dated)
         run: |
-          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));d.history["SC305|thomann"]=[{month:"2026-10",price:649,ts:"2026-10-27T10:00:00.000Z",confidence:"manual"}];d.history["SC307|thomann"]=[{month:"2026-10",price:777,ts:"2026-10-27T10:00:00.000Z",confidence:"manual"}];fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
+          node -e 'const fs=require("fs");const d=JSON.parse(fs.readFileSync("data/history.json","utf8"));d.history["EXO27|vonbroenner"]=[{month:"2026-11",price:639,ts:"2026-11-10T10:00:00.000Z",confidence:"manual"}];fs.writeFileSync("data/history.json",JSON.stringify(d,null,2)+String.fromCharCode(10))'
 
-      - name: Commit v26
+      - name: Commit v27
         run: |
           git config user.name "eve-tracker-bot"
           git config user.email "actions@github.com"
           git add data/history.json
-          git commit -m "fix v26: Thomann SC305 649 EUR, SC307 777 EUR"
+          git commit -m "fix v27: Von Broenner EXO27 639 EUR (verified on product page)"
           git push
